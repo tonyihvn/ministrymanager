@@ -86,5 +86,5 @@ Route::get('/delete-audit/{id}', [App\Http\Controllers\HomeController::class, 'd
 
 
 // ARTISAN COMMANDS
-Route::get('/artisan1/{command}', [App\Http\Controllers\HomeController::class, 'Artisan1']);
-Route::get('/artisan2/{command}/{param}', [App\Http\Controllers\HomeController::class, 'Artisan2']);
+Route::get('/artisan1/{command}', [App\Http\Controllers\ProgrammesController::class, 'Artisan1']);
+Route::get('/artisan2/{command}/{param}', [App\Http\Controllers\ProgrammesController::class, 'Artisan2']);

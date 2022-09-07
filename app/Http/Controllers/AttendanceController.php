@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\attendance;
 use Illuminate\Http\Request;
+use App\Models\audit;
+
 
 class AttendanceController extends Controller
 {
@@ -17,7 +19,7 @@ class AttendanceController extends Controller
         $attendance = attendance::paginate(50);
 
         return view('attendance', compact('attendance'));
-  
+
     }
 
     /**
@@ -27,7 +29,7 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -42,14 +44,21 @@ class AttendanceController extends Controller
             'date' => $request->date,
             'activity' => $request->activity,
             'women' => $request->women,
-            'men'=>$request->men,     
+            'men'=>$request->men,
             'children' => $request->children,
             'total'=>$request->women+$request->men+$request->children,
-            'remarks'=>$request->remarks."(".$request->stayedback." Workers)",                    
+            'remarks'=>$request->remarks."(".$request->stayedback." Workers)",
+            'settings_id'=>Auth()->user()->settings_id,
         ]);
         $attendance = attendance::paginate(50);
-
-        return view('attendance', compact('attendance'));
+        audit::create([
+            'action'=>"A new Attendance record was entered".$request->title,
+            'description'=>'A new Attendance record was entered',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
+        $message='A new Attendance record was entered';
+        return view('attendance', compact('attendance','message'));
 
     }
 
@@ -95,8 +104,14 @@ class AttendanceController extends Controller
      */
     public function destroy($id)
     {
-        attendance::findOrFail($id)->delete();      
-        $message = 'The Attendance Record has been deleted!';      
+        attendance::findOrFail($id)->delete();
+        $message = 'The Attendance Record has been deleted!';
+        audit::create([
+            'action'=>"An Attendance was Deleted",
+            'description'=>'An Attendance record was Deleted',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
         return redirect()->route('attendance')->with(['message'=>$message]);
 
     }

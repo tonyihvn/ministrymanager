@@ -27,7 +27,7 @@ Route::get('/members', [App\Http\Controllers\HomeController::class, 'members'])-
 Route::get('/add-new', [App\Http\Controllers\HomeController::class, 'addNew'])->name('add-new')->middleware('role:Worker,Admin,Followup,Pastor,Super');
 Route::post('/addnew', [App\Http\Controllers\HomeController::class, 'create'])->name('addnew')->middleware('role:Worker,Admin,Followup,Pastor,Super');
 Route::get('/edit-member/{id}/', [App\Http\Controllers\HomeController::class, 'editMember'])->name('edit-member')->middleware('role:Worker,Admin,Followup,Pastor,Super');
-Route::get('/member/{id}/', [App\Http\Controllers\HomeController::class, 'member'])->name('member')->middleware('role:Worker,Admin,Followup,Pastor,Super');
+Route::get('/member/{id}/', [App\Http\Controllers\HomeController::class, 'member'])->name('member')->middleware('role:Worker,Admin,Member,Followup,Pastor,Super');
 Route::get('/delete-member/{id}', [App\Http\Controllers\HomeController::class, 'deleteMember'])->name('delete-member')->middleware('role:Admin,Followup,Pastor,Super');
 Route::post('/settings', [App\Http\Controllers\HomeController::class, 'settings'])->name('settings')->middleware('role:Super');
 Route::post('/switchministry', [App\Http\Controllers\HomeController::class, 'switchministry'])->name('switchministry')->middleware('role:Super,Admin');
@@ -37,7 +37,7 @@ Route::post('/searchmembers', [App\Http\Controllers\HomeController::class, 'memb
 // TASKS / TO DOs
 Route::post('/newtask', [App\Http\Controllers\TasksController::class, 'store'])->name('newtask')->middleware('role:Worker,Admin,Followup,Pastor,Super');
 Route::post('/newfollowup', [App\Http\Controllers\TasksController::class, 'newfollowup'])->name('newfollowup')->middleware('role:Worker,Admin,Followup,Pastor,Super');
-Route::get('/tasks', [App\Http\Controllers\TasksController::class, 'index'])->name('tasks')->middleware('role:Worker,Admin,Followup,Pastor,Super');
+Route::get('/tasks', [App\Http\Controllers\TasksController::class, 'index'])->name('tasks')->middleware('role:Worker,Admin,Followup,ember,Pastor,Super');
 Route::get('/completetask/{id}', [App\Http\Controllers\TasksController::class, 'completetask'])->name('completetask')->middleware('role:Worker,Admin,Followup,Pastor,Super');
 Route::get('/inprogresstask/{id}', [App\Http\Controllers\TasksController::class, 'inprogresstask'])->name('inprogresstask')->middleware('role:Worker,Admin,Followup,Pastor,Super');
 Route::get('/delete-task/{id}', [App\Http\Controllers\TasksController::class, 'destroy'])->name('destroy')->middleware('role:Super');
@@ -70,7 +70,7 @@ Route::get('/delete-hfel/{id}', [App\Http\Controllers\HousefellowhipsController:
 
 
 // PROGRAMMES
-Route::get('/programmes', [App\Http\Controllers\ProgrammesController::class, 'index'])->name('programmes')->middleware('role:Admin,Super,Pastor');
+Route::get('/programmes', [App\Http\Controllers\ProgrammesController::class, 'index'])->name('programmes')->middleware('role:Member,Admin,Memeber,Super,Pastor');
 Route::post('/addprogramme', [App\Http\Controllers\ProgrammesController::class, 'store'])->name('addprogramme')->middleware('role:Admin,Super,Pastor');
 Route::get('/post/{id}', [App\Http\Controllers\ProgrammesController::class, 'post'])->name('post');
 Route::get('/delete-prog/{id}', [App\Http\Controllers\ProgrammesController::class, 'destroy'])->name('delete-prog')->middleware('role:Admin,Super,Pastor');
@@ -80,6 +80,9 @@ Route::get('/communications', [App\Http\Controllers\HomeController::class, 'comm
 Route::post('/sendsms', [App\Http\Controllers\HomeController::class, 'sendSMS'])->name('sendsms')->middleware('role:Admin,Super,Pastor');
 Route::get('/sentmessages', [App\Http\Controllers\HomeController::class, 'sentSMS'])->name('sentmessages')->middleware('role:Admin,Super,Pastor');
 
+// AUDITS ROUTES
+Route::get('/audits', [App\Http\Controllers\HomeController::class, 'audits'])->name('audits')->middleware('role:Admin,Super,Pastor');
+Route::get('/delete-audit/{id}', [App\Http\Controllers\HomeController::class, 'delAudit'])->name('delete-audit')->middleware('role:Admin,Super,Pastor');
 
 
 // ARTISAN COMMANDS

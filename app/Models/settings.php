@@ -53,7 +53,7 @@ class settings extends Model
 
     public function programmes()
     {
-        return $this->hasMany(programmes::class, 'ministry_id', 'id');
+        return $this->hasMany(programmes::class, 'settings_id', 'id');
     }
 
     public function tasks()

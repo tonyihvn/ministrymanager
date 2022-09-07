@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\audit;
 use App\Models\housefellowhips;
 use App\Models\ministries;
 use App\Models\attendance;
@@ -48,22 +49,38 @@ class HomeController extends Controller
         if(($role=="Admin") || (Auth()->user()->role=="Super")){
             $attendance = attendance::where('activity','Sunday Service')->offset(0)->take(10)->get();
 
-            $midweek = attendance::select('men')->offset(0)->take(10)->get();
+            $midweekquery = attendance::where('activity','Midweek Services')->offset(0)->take(10)->get();
 
-            $uprogrammes = programmes::where('category','Upcoming')->select('id','title','from','to','ministry')->paginate(5);
+            $uprogrammes = programmes::latest()->where('category','Upcoming')->select('id','title','from','to','ministry')->paginate(5);
+
+            $dates = ''; $totals = ''; $midweek = ''; $midweektotals = '';
 
             if($attendance->count()>0){
-            $dates = "'".$attendance[0]->date."','".$attendance[1]->date."','".$attendance[2]->date."','".$attendance[3]->date."','".$attendance[4]->date."','".$attendance[5]->date."','".$attendance[6]->date."','".$attendance[7]->date."','".$attendance[8]->date."','".$attendance[9]->date."'";
+                foreach($attendance as $key=>$att){
 
-            $totals = $attendance[0]->total.",".$attendance[1]->total.",".$attendance[2]->total.",".$attendance[3]->total.",".$attendance[4]->total.",".$attendance[5]->total.",".$attendance[6]->total.",".$attendance[7]->total.",".$attendance[8]->total.",".$attendance[9]->total;
-
-            $midweek = $midweek[0]->men.",".$midweek[1]->men.",".$midweek[2]->men.",".$midweek[3]->men.",".$midweek[4]->men.",".$midweek[5]->men.",".$midweek[6]->men.",".$midweek[7]->men.",".$midweek[8]->men.",".$midweek[9]->men;
-            }else{
-            $dates = ''; $totals = ''; $midweek = '';
+                    $dates.= "'".$att->date."',";
+                    $totals.= $att->total.",";
+                }
             }
-            return view('home', compact('dates','midweek','totals','uprogrammes'))->with('message','Role is :'.$role);
+            if($midweekquery->count()>0){
+                foreach($midweekquery as $key=>$mw){
+                    $midweek.= $mw->date.",";
+                    $midweektotals.= $mw->total.",";
+                }
+            }
+            /*
+                $dates = "'".$attendance[0]->date."','".$attendance[1]->date."','".$attendance[2]->date."','".$attendance[3]->date."','".$attendance[4]->date."','".$attendance[5]->date."','".$attendance[6]->date."','".$attendance[7]->date."','".$attendance[8]->date."','".$attendance[9]->date."'";
+
+                $totals = $attendance[0]->total.",".$attendance[1]->total.",".$attendance[2]->total.",".$attendance[3]->total.",".$attendance[4]->total.",".$attendance[5]->total.",".$attendance[6]->total.",".$attendance[7]->total.",".$attendance[8]->total.",".$attendance[9]->total;
+
+                $midweek = $midweek[0]->men.",".$midweek[1]->men.",".$midweek[2]->men.",".$midweek[3]->men.",".$midweek[4]->men.",".$midweek[5]->men.",".$midweek[6]->men.",".$midweek[7]->men.",".$midweek[8]->men.",".$midweek[9]->men;
+            */
+
+
+            return view('home', compact('dates','midweek','totals','uprogrammes','midweektotals'))->with('message','Role is :'.$role);
         }else{
-            return view('member_home')->with('message','Role is :'.$role);;
+            $programmes = programmes::latest()->paginate(10);
+            return view('member_home',compact('programmes'))->with('message','Role is :'.$role);;
 
         }
 
@@ -72,13 +89,15 @@ class HomeController extends Controller
 
     public function logout()
     {
-      Auth::logout();
+      Auth()->logout();
+
       return redirect('/');
     }
 
     public function members()
+
     {
-      $members = User::all();
+      $members = User::all()->where('settings_id',Auth::user()->settings_id);
       $users = User::select('name','id')->get();
       return view('members', compact('members','users'));
     }
@@ -143,23 +162,32 @@ class HomeController extends Controller
             'ministry' => $request->ministry,
             'role'=>$request->role,
             'status'=>$request->status,
-            'settings_id'=>$request->settings_id
+            'settings_id'=>Auth()->user()->settings_id
 
         ])->id;
 
-        admintable::createOrUpdate([
+
+        admintable::updateOrCreate([
             'user_id'=>$userid,
-            'settings_id'=>$request->settings_id
+            'settings_id'=>Auth()->user()->settings_id,
         ],[
             'user_id'=>$userid,
-            'settings_id'=>$request->settings_id,
-            'status'=>$request->role,
+            'settings_id'=>Auth()->user()->settings_id,
+            'role'=>$request->role,
         ]);
+
 
         $members = User::all();
         $users = User::select('name','id')->get();
 
-        return view('members', compact('members','users'));
+        audit::create([
+            'action'=>"A New member was Created by ".$request->name,
+            'description'=>'Create',
+            'doneby'=>Auth()->user()->name,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
+        $message='A New member was Created';
+        return view('members', compact('members','users','message'));
 
     }
 
@@ -176,7 +204,15 @@ class HomeController extends Controller
     public function deleteMember($id)
     {
       $user = User::where('id',$id)->delete();
+
       $message = 'The member has been deleted!';
+
+      audit::create([
+        'action'=>"A member was deleted",
+        'description'=>'Delete',
+        'doneby'=>Auth()->user()->id,
+        'settings_id'=>Auth()->user()->settings_id,
+      ]);
       return redirect()->route('members')->with(['message'=>$message]);
 
     }
@@ -225,6 +261,14 @@ class HomeController extends Controller
 
         }
         $allnumbers = substr($allnumbers,0,-1);
+
+        audit::create([
+            'action'=>"A message was sent to ".$number,
+            'description'=>'Send message',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
+        $message='The message has been sent';
         return view('communications', compact('members','allnumbers','creditbalance'));
       }
     }
@@ -278,6 +322,14 @@ class HomeController extends Controller
       $creditbalance = ltrim(substr($cbal,3),' ');
 
       $allnumbers = substr($allnumbers,0,-1);
+
+      // ADD AUDIT HERE
+      audit::create([
+        'action'=>"Informations where sent to members",
+        'description'=>'Sent Information',
+        'doneby'=>Auth()->user()->id,
+        'settings_id'=>Auth()->user()->settings_id,
+      ]);
       return view('communications', compact('members','allnumbers','message','creditbalance'));
 
 
@@ -333,6 +385,13 @@ class HomeController extends Controller
           'ministrygroup_id'=>$request->ministrygroup_id,
           'user_id'=>$request->user_id
       ]);
+
+      audit::create([
+        'action'=>"Settings update!".$request->ministry_name,
+        'description'=>'Update!',
+        'doneby'=>Auth()->user()->id,
+        'settings_id'=>Auth()->user()->settings_id,
+      ]);
       $message = "The settings has been updated!";
       return redirect()->back()->with(['message'=>$message]);
     }
@@ -359,6 +418,22 @@ class HomeController extends Controller
         $ministry_name = settings::where('id',$request->settings_id)->first()->ministry_name;
         $message = "You have been switch to ".$ministry_name;
         return redirect()->route('home')->with(['message'=>$message,'settings_id'=>$admininfo->settings_id]);
+    }
+
+    public function audits()
+    {
+      $audits = audit::orderBy('id', 'DESC')->paginate(10);
+      return view('audits', compact('audits'));
+    }
+
+    public function delAudit($id)
+    {
+      $audit = audit::where('id',$id)->delete();
+
+      $message = 'The Audit record has been deleted!';
+
+      return redirect()->route('audits')->with(['message'=>$message]);
+
     }
 
     public function Artisan1($command) {

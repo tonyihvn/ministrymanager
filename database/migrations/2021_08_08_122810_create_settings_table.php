@@ -15,18 +15,18 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('ministry_name')->nullable();
-            $table->string('motto')->nullable();
-            $table->string('logo')->nullable();
-            $table->string('address')->nullable();
-            $table->string('background')->nullable();
+            $table->string('ministry_name',100)->nullable();
+            $table->string('motto',100)->nullable();
+            $table->string('logo',50)->nullable();
+            $table->string('address',100)->nullable();
+            $table->string('background',50)->nullable();
             $table->string('mode')->nullable();
-            $table->string('color')->nullable();
+            $table->string('color',30)->nullable();
             $table->foreignId('ministrygroup_id')->constrained('ministrygroups')->nullable();
             $table->foreignId('user_id')->constrained('users')->nullable();;
 
             $table->timestamps();
-            
+
         });
 
         DB::table('settings')->insert(

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ministries;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\audit;
 
 class MinistriesController extends Controller
 {
@@ -43,11 +44,19 @@ class MinistriesController extends Controller
             'name' => $request->name,
             'details' => $request->details,
             'leader' => $request->leader,
-            'activities'=>$request->activities                
+            'activities'=>$request->activities,
+            'settings_id'=>Auth()->user()->settings_id
         ]);
         $ministries = ministries::paginate(50);
         $users = User::select('id','name');
-        return view('ministries', compact('ministries','users'));
+        audit::create([
+            'action'=>"A Ministry was created/modified".$request->name,
+            'description'=>'Create/modify',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id
+        ]);
+        $message='A Ministry was created/modified';
+        return view('ministries', compact('ministries','users','message'));
     }
 
     /**
@@ -92,8 +101,14 @@ class MinistriesController extends Controller
      */
     public function destroy($id)
     {
-        ministries::findOrFail($id)->delete();      
-        $message = 'The ministry has been deleted!';      
+        ministries::findOrFail($id)->delete();
+        $message = 'The ministry has been deleted!';
+        audit::create([
+            'action'=>"A Ministry was deleted",
+            'description'=>'Delete',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
         return redirect()->route('ministries')->with(['message'=>$message]);
     }
 }

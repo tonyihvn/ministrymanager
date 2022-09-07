@@ -15,17 +15,17 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title',50);
             $table->integer('amount');
-            $table->string('account_head');
+            $table->string('account_head',50);
             $table->date('date')->nullable();
-            $table->string('reference_no')->nullable();
+            $table->string('reference_no',70)->nullable();
             $table->string('upload')->nullable();
             $table->string('detail')->nullable();
-            $table->string('from')->nullable();
-            $table->string('to')->nullable();
-            $table->string('approved_by')->nullable();
-            $table->string('recorded_by')->nullable();
+            $table->string('from',70)->nullable();
+            $table->string('to',70)->nullable();
+            $table->string('approved_by',50)->nullable();
+            $table->string('recorded_by',50)->nullable();
             $table->foreignId('settings_id')->constrained();
             $table->timestamps();
         });

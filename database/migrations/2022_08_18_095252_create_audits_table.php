@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMinistriesTable extends Migration
+class CreateAuditsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateMinistriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ministries', function (Blueprint $table) {
+        Schema::create('audits', function (Blueprint $table) {
             $table->id();
-            $table->string('name',70);
-            $table->string('details')->nullable();
-            $table->string('leader',50)->nullable();
-            $table->text('activities')->nullable();
+            $table->string('action',100);
+            $table->text('description',100);
+            $table->string('doneby',40);
             $table->foreignId('settings_id')->constrained();
             $table->timestamps();
         });
@@ -31,6 +30,6 @@ class CreateMinistriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ministries');
+        Schema::dropIfExists('audits');
     }
 }

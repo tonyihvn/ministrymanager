@@ -6,6 +6,7 @@ use App\Models\tasks;
 use Illuminate\Http\Request;
 use App\Models\followups;
 use App\Models\User;
+use App\Models\audit;
 use Auth;
 
 class TasksController extends Controller
@@ -81,7 +82,15 @@ class TasksController extends Controller
 
             $message = file_get_contents("http://www.smslive247.com/http/index.aspx?cmd=sendmsg&sessionid=".$sessionid."&message=".urlencode($body)."&sender=CHURCH&sendto=".$recipients."&msgtype=0");
         }
-        return redirect()->back()->with(['tasks'=>$tasks]);
+        audit::create([
+            'action'=>"Task has been assigned to ".$request->assigned_to,
+            'description'=>'Assign',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
+
+        $message = "Task added successfully";
+        return redirect()->back()->with(['tasks'=>$tasks,'message'=>$message]);
 
     }
 
@@ -129,6 +138,12 @@ class TasksController extends Controller
     {
         tasks::findOrFail($id)->delete();
         $message = 'The task has been deleted!';
+        audit::create([
+            'action'=>"A task was deleted",
+            'description'=>'Delete',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
         return redirect()->route('tasks')->with(['message'=>$message]);
     }
 
@@ -136,6 +151,12 @@ class TasksController extends Controller
     {
         followups::findOrFail($id)->delete();
         $message = 'The followup activity has been deleted!';
+        audit::create([
+            'action'=>"A Follow-up activity was deleted from the activity log ".$member,
+            'description'=>'Delete',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
         return redirect()->route('member',['id'=>$member])->with(['message'=>$message]);
     }
 
@@ -146,6 +167,12 @@ class TasksController extends Controller
         $task->save();
 
         $message = 'The task has been updated!';
+        audit::create([
+            'action'=>"Task update",
+            'description'=>'Update',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
         return redirect()->route('tasks')->with(['message'=>$message]);
     }
 
@@ -156,6 +183,12 @@ class TasksController extends Controller
         $task->save();
 
         $message = 'The task has been updated!';
+        audit::create([
+            'action'=>"Task update",
+            'description'=>'Update',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
         return redirect()->route('tasks')->with(['message'=>$message]);
     }
 
@@ -170,7 +203,8 @@ class TasksController extends Controller
             'nextaction' => $request->nextaction,
             'nextactiondate' => $request->nextactiondate,
             'status' => $request->status,
-            'assigned_to'=>$request->assigned_to
+            'assigned_to'=>$request->assigned_to,
+            'settings_id'=>Auth()->user()->settings_id,
         ]);
 
         tasks::updateOrCreate(['id'=>$request->id],[
@@ -180,7 +214,8 @@ class TasksController extends Controller
             'activities' => $request->nextaction,
             'status' => $request->status,
             'assigned_to'=>$request->assigned_to,
-            'member'=>$request->member
+            'member'=>$request->member,
+            'settings_id'=>Auth()->user()->settings_id,
         ]);
 
 
@@ -210,8 +245,14 @@ class TasksController extends Controller
 
             $message = file_get_contents("http://www.smslive247.com/http/index.aspx?cmd=sendmsg&sessionid=".$sessionid."&message=".urlencode($body)."&sender=CHURCH&sendto=".$recipients."&msgtype=0");
         }
-
-        return redirect()->back()->with(['tasks'=>$tasks,'followups'=>$followups]);
+        audit::create([
+            'action'=>"A new task for followup was created/modified ".$request->title,
+            'description'=>'Create/Modify',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
+        $message="A new task for followup was created/modified";
+        return redirect()->back()->with(['tasks'=>$tasks,'followups'=>$followups,'message'=>$message]);
 
     }
 }

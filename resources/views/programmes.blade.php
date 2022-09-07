@@ -7,7 +7,9 @@
     <div class="row">
             <div class="panel">
                 <div class="panel-heading">
-
+                    @isset($message)
+                        <div class="alert alert-dismissable alert-info">Your Programme has been successfully placed!</div>
+                    @endisset
                         <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#programme">Add New</a>
 
 
@@ -31,8 +33,10 @@
 
                                 <tr>
                                     <td width="10%">
+
+
                                         <a href="/post/{{$prog->id}}">
-                                            <img src="{{asset('/images/'.$prog->picture)}}" class="img-circle" alt="{{$settings->logo}}" width="100%" height="auto">
+                                            <img src="{{asset('/images/'.$prog->picture)}}"  alt="{{$settings->logo}}" width="100%" height="auto">
                                         </a>
                                     </td>
                                     <td><a href="/post/{{$prog->id}}"><b>{{$prog->title}}</b></td>
@@ -52,9 +56,7 @@
 
                         </tbody>
                     </table>
-                    <div style="text-align: right">
-                        {{$programmes->links("pagination::bootstrap-4")}}
-                    </div>
+
                 </div>
             </div>
 
@@ -142,14 +144,9 @@
 
                 <div class="form-group">
                     <input type="hidden" id="oldpicture" name="oldpicture">
-                    <label for="picture">Upload Featured Image</label>
+                    <label for="picture">Upload Featured Image  <i>(best resolution: 1920/1080pixel)</i></label>
                     <input type="file" name="picture" id="picture" class="form-control">
                 </div>
-
-
-
-
-
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">

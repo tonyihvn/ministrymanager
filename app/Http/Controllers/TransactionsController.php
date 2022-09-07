@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\accountheads;
 use App\Models\User;
+use App\Models\audit;
 
 class TransactionsController extends Controller
 {
@@ -46,21 +47,28 @@ class TransactionsController extends Controller
             'title' => $request->title,
             'amount' => $request->amount,
             'account_head' => $request->account_head,
-            'date'=>$request->date,     
+            'date'=>$request->date,
             'reference_no' => $request->reference_no,
             'upload'=>'',
             'detail'=>$request->detail,
             'from'=>$request->from,
-            'to'=>$request->to,                    
+            'to'=>$request->to,
             'approved_by'=>$request->approved_by,
             'recorded_by'=>$request->recorded_by,
+            'settings_id'=>Auth()->user()->settings_id,
 
         ]);
         $transactions = transactions::paginate(50);
         $accountheads = accountheads::select('title','category')->get();
         $users = User::select('id','name')->get();
-
-        return view('transactions', compact('transactions','accountheads','users'));
+        audit::create([
+            'action'=>"An transaction was created/modified",
+            'description'=>'Create/Modify',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
+        $message='An transaction was created/modified';
+        return view('transactions', compact('transactions','accountheads','users','message'));
 
     }
 
@@ -106,8 +114,14 @@ class TransactionsController extends Controller
      */
     public function destroy($id)
     {
-        transactions::findOrFail($id)->delete();      
-        $message = 'The transaction\'s Record has been deleted!';      
+        transactions::findOrFail($id)->delete();
+        $message = 'The transaction\'s Record has been deleted!';
+        audit::create([
+            'action'=>"Transaction deleted",
+            'description'=>'Delete',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
         return redirect()->route('transactions')->with(['message'=>$message]);
     }
 }

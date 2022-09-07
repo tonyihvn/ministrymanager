@@ -46,10 +46,10 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand row">
 				<div class="col-lg-3">
-					<img  src="/images/{{$settings->logo}}" alt="{{$settings->motto}}" class="img-responsive logo" style="height: auto !important; width: 100%; position: relative; padding: 0px;">
+					<a href="/home"> <img  src="/images/{{$settings->logo}}" alt="{{$settings->motto}}" class="img-responsive logo" style="height: auto !important; width: 100%; position: relative; padding: 0px;"></a>
 				</div>
 				<div class="col-lg-9">
-					<b style="color: {{$settings->color}};">{{$settings->ministry_name}}</b><br>
+					<a href="/home"><b style="color: {{$settings->color}};">{{$settings->ministry_name}}</b></a><br>
 					<small>{{$settings->motto}}</small>
 				</div>
 			</div>
@@ -87,13 +87,7 @@
 								<li><a href="/tasks" class="more">See all notifications</a></li>
 							</ul>
 						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="/help">Basic Use</a></li>
-								<li><a href="/security">Security</a></li>
-							</ul>
-						</li>
+
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="lnr lnr-user"></i> <span>@auth {{ Auth::user()->name }} @endauth </span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
@@ -101,6 +95,8 @@
 								<li><a href="/tasks"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
 								<li><a href="#"  data-toggle="modal" data-target="#settings"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
                                 <li><a href="#"  data-toggle="modal" data-target="#switchministry"><i class="lnr lnr-sync"></i> <span>Switch Ministry/Church</span></a></li>
+                                <li><a href="/audits"><i class="lnr lnr-list"></i> <span>Audit Trails</span></a></li>
+                                <li><a href="/help"><i class="lnr lnr-help"></i> <span>Help</span></a></li>
 								<li><a href="/logout"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
 							</ul>
 						</li>
@@ -425,6 +421,7 @@
 			var dates = [<?php echo $dates; ?>];
 			var totals = [<?php echo $totals; ?>];
 			var midweek = [<?php echo $midweek; ?>];
+            var midweektotals = [<?php echo $midweektotals; ?>];
 
 
 			console.log(dates);
@@ -436,7 +433,7 @@
 				text: 'Sunday Service Attendance Chart'
 				},
 				xAxis: {
-				categories: dates
+				categories: dates,midweek
 				},
 				yAxis: {
 					title: {
@@ -449,8 +446,8 @@
 				data: totals
 				},
 				{
-				name: 'Men',
-				data: midweek
+				name: 'Midweek Services',
+				data: midweektotals
 				}]
 			});
 		});
@@ -761,7 +758,11 @@
 		}
 		protect();
 
-		$( ".datepicker" ).datepicker();
+		$( ".datepicker" ).datepicker({
+            yearRange: "-10:+   10",
+            changeYear: true,
+            dateFormat: 'yy-mm-dd',
+        });
 
         $("#create_new_ministry").click(function(){
             var token = $("input[name=_token]").val();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\programmes;
 use Illuminate\Http\Request;
 use App\Models\ministries;
+use App\Models\audit;
 
 class ProgrammesController extends Controller
 {
@@ -15,10 +16,12 @@ class ProgrammesController extends Controller
      */
     public function index()
     {
+
         $ministries = ministries::select('name')->get();
-        $programmes = programmes::paginate(10);
+        $programmes = programmes::latest()->paginate(10);
 
         return view('programmes', compact('programmes','ministries'));
+
     }
 
     /**
@@ -68,21 +71,34 @@ class ProgrammesController extends Controller
             'ministry' => $request->ministry,
             'picture'=>$picture,
             'settings_id'=>Auth()->user()->settings_id
-
-
         ]);
         $ministries = ministries::select('name')->get();
         $programmes = programmes::paginate(10);
 
-        return view('programmes', compact('programmes','ministries'));
+        audit::create([
+            'action'=>"A Post was Scheduled/modified ".$request->title,
+            'description'=>'Create/Update',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
+
+        $message = "<div class='alert alert-dismissable alert-info'>The post created or modified successfully</div>";
+
+        return view('programmes', compact('programmes','ministries'))->with(['message'=>$message]);
     }
 
     public function post($id)
     {
 
         $program = programmes::where('id',$id)->first();
-
-        return view('post', compact('program'));
+        audit::create([
+            'action'=>"A Programme has being Scheduled/modified",
+            'description'=>'Create/Modify',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
+        $message = "The Programme has being created/modified successfully";
+        return view('post', compact('program','message'));
     }
 
     /**
@@ -129,6 +145,12 @@ class ProgrammesController extends Controller
     {
         programmes::findOrFail($id)->delete();
         $message = 'The Post has been deleted!';
+        audit::create([
+            'action'=>"A post was deleted ",
+            'description'=>'Delete',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
         return redirect()->route('programmes')->with(['message'=>$message]);
     }
 }

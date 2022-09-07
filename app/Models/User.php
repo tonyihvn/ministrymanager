@@ -33,8 +33,10 @@ class User extends Authenticatable
         'invited_by',
         'assigned_to',
         'ministry',
+        'settings_id',
         'role',
         'status'
+
     ];
 
     /**

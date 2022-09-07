@@ -15,10 +15,10 @@ class CreateHousefellowhipsTable extends Migration
     {
         Schema::create('housefellowhips', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('location')->nullable();
-            $table->string('address')->nullable();
-            $table->string('leader')->nullable();
+            $table->string('name',70);
+            $table->string('location',70)->nullable();
+            $table->string('address',75)->nullable();
+            $table->string('leader',50)->nullable();
             $table->text('about')->nullable();
             $table->text('activities')->nullable();
             $table->foreignId('settings_id')->constrained();

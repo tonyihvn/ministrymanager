@@ -2,7 +2,7 @@
 <html lang="en" class="fullscreen-bg">
 
 <head>
-	<title>{{$settings->ministry_name}} | Login</title>
+	<title>Ministry Manager | Login</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -28,7 +28,7 @@
 		}
 
 		.left, .right{
-			
+
 			overflow-y: visible !important;
 			height: auto !important;
 			min-height: 500px;
@@ -37,21 +37,21 @@
 		.auth-box .right .overlay{
 			opacity: 0.92;
 			background-color: {{$settings->color}} !important;
-			
+
 		}
 
 		 .logocontainer{
-			display: flex !important; 
-			justify-content: center !important; 
-			align-items: center !important; 
-				
-			
+			display: flex !important;
+			justify-content: center !important;
+			align-items: center !important;
+
+
 		}
 
 		.logo{
 			height: 100px;
-			width: 100px; 
-			border: white 4px solid; 	
+			width: 100px;
+			border: white 4px solid;
 			box-shadow: 2px 2px #ccc;
 			margin-bottom: -20px;
 			z-index: 99999999999999999999999;
@@ -63,17 +63,17 @@
 </head>
 
 <body>
-	
-	
-	
+
+
+
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<div class="vertical-align-wrap">
-			
-			<div class="vertical-align-middle">	
+
+			<div class="vertical-align-middle">
 
 				<div class="logocontainer">
-					<img  src="/images/{{$settings->logo}}" alt="{{$settings->motto}}" class="logo  img-circle">
+					<img  src="assets/img/cover_login.jpg" alt="{{$settings->motto}}" class="logo  img-circle">
 				</div>
 
 				<div class="auth-box ">
@@ -88,8 +88,8 @@
                             <div class="overlay"></div>
                             <div class="content text">
 
-                                <h1 style="margin-top: 100px;">{{$settings->ministry_name}}</h1>
-                                <p>{{$settings->motto}}</p>
+                                <h1 style="margin-top: 100px;">The Ministry Manager</h1>
+                                <p>A comprehensive system to manage every activity in a church/ministry.</p>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -99,7 +99,7 @@
         </div>
         <!-- END WRAPPER -->
     </body>
-    
+
     </html>
 	<script src="{{asset('/assets/vendor/jquery/jquery.min.js')}}"></script>
 	<script src="{{asset('/assets/jquery-ui/jquery-ui.min.js')}}"></script>
@@ -110,11 +110,10 @@
             $('.datepicker').datepicker({
 				yearRange: "-80:+0",
                 changeYear: true,
-                
+
             });
 		});
 
 	</script>
 
-    
-                            
+

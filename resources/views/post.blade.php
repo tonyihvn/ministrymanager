@@ -17,6 +17,7 @@
     <div class="row" id="gradientbg">
 
             <div class="panel" style="background: white; opacity: 0.7;">
+            {{--
                 <div id="carouselId" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselId" data-slide-to="0" class="active"></li>
@@ -43,6 +44,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+            --}}
                 <div class="panel-heading">
                         @if ($program->type!="News")
                             <b>Host: </b> {{$program->ministry}}

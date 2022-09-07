@@ -1,7 +1,9 @@
 @extends('layouts.theme')
 
 @section('content')
-    @php $pagename="member_home"; @endphp
+    @php $pagename="member_home";@endphp
+
+
 
     <h3 class="page-title">Dashboard | <small style="color: green"> Updates, Tasks, Messages</small></h3>
     <div class="row">
@@ -15,7 +17,49 @@
                 </div>
             </div>
         </div>
+        <div class="panel-body">
+            <div class="container">
+               <h3>You are welcome to <b style="color: {{$settings->color}};">{{$settings->ministry_name}}</b></h3>
+               <small>{{$settings->motto}}</small>
+            </div>
+            <div class="panel-body">
+                <table class="table  responsive-table">
+                    <thead>
+                        <tr style="color: ">
+                            <th>Banner</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Category</th>
+                            <th>Host</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach ($programmes as $prog)
+                            <tr>
+                                <td width="10%">
+                                    <a href="/post/{{$prog->id}}">
+                                        <img src="{{asset('/images/'.$prog->picture)}}"  alt="{{$settings->logo}}" width="100%" height="auto">
+                                    </a>
+                                </td>
+                                <td><a href="/post/{{$prog->id}}"><b>{{$prog->title}}</b></td>
+                                <td><b>{{$prog->from==$prog->to?$prog->from:$prog->from." to ".$prog->to}}</b></td>
+                                <td>{{$prog->type}}</td>
+                                <td>{{$prog->category}}</td>
+                                <td>{{$prog->ministry}}</td>
+
+                            </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </div>
+
 
 
 

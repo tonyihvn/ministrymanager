@@ -15,14 +15,14 @@ class CreateProgrammesTable extends Migration
     {
         Schema::create('programmes', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('type')->nullable();
-            $table->date('from')->nullable();
-            $table->date('to')->nullable();
+            $table->string('title',50)->nullable();
+            $table->string('type',50)->nullable();
+            $table->date('from',70)->nullable();
+            $table->date('to',70)->nullable();
             $table->text('details')->nullable();
-            $table->string('category')->nullable();
-            $table->string('picture')->nullable();
-            $table->string('ministry')->nullable();
+            $table->string('category',70)->nullable();
+            $table->string('picture',40)->nullable();
+            $table->string('ministry',70)->nullable();
             $table->foreignId('settings_id')->constrained();
             $table->timestamps();
         });

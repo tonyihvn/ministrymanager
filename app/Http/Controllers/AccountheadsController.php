@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\accountheads;
+use App\Models\audit;
 use Illuminate\Http\Request;
 
 class AccountheadsController extends Controller
@@ -26,7 +27,7 @@ class AccountheadsController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -37,16 +38,24 @@ class AccountheadsController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         accountheads::updateOrCreate(['id'=>$request->id],[
             'title' => $request->title,
             'category' => $request->category,
             'type' => $request->type,
-            'description'=>$request->description,                       
+            'description'=>$request->description,
+            'settings_id'=>Auth()->user()->settings_id,
         ]);
         $accountheads = accountheads::all();
 
-        return view('account-heads', compact('accountheads'));
+        audit::create([
+            'action'=>"An account head was created/modified".$request->title,
+            'description'=>'Create/modified',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
+        $message='An account head was created/modified';
+        return view('account-heads', compact('accountheads','message'));
 
     }
 
@@ -58,7 +67,7 @@ class AccountheadsController extends Controller
      */
     public function show(accountheads $accountheads)
     {
-        
+
     }
 
     /**
@@ -92,11 +101,17 @@ class AccountheadsController extends Controller
      */
     public function destroy($id)
     {
-        
-      accountheads::findOrFail($id)->delete();      
-      $message = 'The Account Head has been deleted!';      
+
+      accountheads::findOrFail($id)->delete();
+      audit::create([
+        'action'=>"An Account head was Deleted",
+        'description'=>'Delete',
+        'doneby'=>Auth()->user()->id,
+        'settings_id'=>Auth()->user()->settings_id,
+      ]);
+      $message = 'The Account Head has been deleted!';
       return redirect()->route('account-heads')->with(['message'=>$message]);
 
-    
+
     }
 }

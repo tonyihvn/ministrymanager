@@ -141,8 +141,11 @@
                                         <button type="submit" class="btn btn-primary">
                                             {{ __('Sign Up') }}
                                         </button>
-
+                                        <a href="/login"><p class="btn btn-primary">
+                                            Sign-in
+                                        </p></a>
                                 </div>
+
                             </form>
 
 

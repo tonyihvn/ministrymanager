@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\housefellowhips;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\audit;
+
 
 class HousefellowhipsController extends Controller
 {
@@ -45,11 +47,20 @@ class HousefellowhipsController extends Controller
             'address' => $request->address,
             'about' => $request->about,
             'leader' => $request->leader,
-            'activities'=>$request->activities                
+            'activities'=>$request->activities,
+            'settings_id'=>Auth()->user()->settings_id,
         ]);
         $housefellowships = housefellowhips::paginate(50);
         $users = User::select('id','name');
-        return view('housefellowships', compact('housefellowships','users'));
+
+        audit::create([
+            'action'=>"A House fellowship has been created ".$request->name,
+            'description'=>'Create',
+            'doneby'=>Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
+        $message='A House fellowship has been created';
+        return view('housefellowships', compact('housefellowships','users','message'));
     }
 
     /**
@@ -94,8 +105,15 @@ class HousefellowhipsController extends Controller
      */
     public function destroy($id)
     {
-        housefellowhips::findOrFail($id)->delete();      
-        $message = 'The House Fellowship has been deleted!';      
+        housefellowhips::findOrFail($id)->delete();
+        $message = 'The House Fellowship has been deleted!';
+
+        audit::create([
+            'action'=>"A House fellowship has been remove from the ministry",
+            'description'=>'Removed',
+            'doneby'=> Auth()->user()->id,
+            'settings_id'=>Auth()->user()->settings_id,
+        ]);
         return redirect()->route('housefellowships')->with(['message'=>$message]);
     }
 }

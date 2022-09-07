@@ -443,9 +443,8 @@ class HomeController extends Controller
     }
 
     public function Artisan2($command, $param) {
-      $artisan = Artisan::call($command,['flag'=>$param]);
-      $output = Artisan::output();
-      return dd($output);
+        $output = Artisan::call($command.":".$param);
+        return dd($output);
     }
 
 }

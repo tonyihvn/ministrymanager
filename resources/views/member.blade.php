@@ -33,7 +33,16 @@
                                     $phone_number = '';
                                     $phone_number2 = '';
 
+                                    if($member->invited_by!=""){
+                                        $invited_by = $users->where('id',$member->invited_by)->first()->name;
+                                        $phone_number = $users->where('id',$member->invited_by)->first()->phone_number;
+                                    }
 
+
+                                    if($member->assigned_to!=""){
+                                        $assigned_to = $users->where('id',$member->assigned_to)->first()->name;
+                                        $phone_number2 = $users->where('id',$member->invited_by)->first()->phone_number;
+                                    }
                                 @endphp
                                 <li class="list-group-item">Invited By: <b>{{$invited_by}} (<a href="tel:{{$phone_number}}">{{$phone_number}}</a>)</b></li>
                                 <li class="list-group-item">Assigned To: <b>{{$assigned_to}} (<a href="tel:{{$phone_number2}}">{{$phone_number2}}</a>)</b></li>

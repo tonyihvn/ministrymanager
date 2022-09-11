@@ -2,7 +2,7 @@
 
 @section('content')
                     <div class="header">
-                        <p class="lead">Login to your account</p>
+                        <p class="lead">Login or create account</p>
                     </div>
 
                     <form method="POST" action="{{ route('login') }}" class="form-auth-small">
@@ -11,7 +11,7 @@
                         <div class="form-group clearfix">
                             <label for="email" class="control-label sr-only">{{ __('E-Mail Address') }}</label>
 
-                            
+
                                 <input placeholder="E-mail" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
@@ -19,13 +19,13 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            
+
                         </div>
 
                         <div class="form-group clearfix">
                             <label for="password" class="control-label sr-only">{{ __('Password') }}</label>
 
-                            
+
                                 <input placeholder="Password" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
@@ -33,7 +33,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            
+
                         </div>
 
                         <div class="form-group clearfix">
@@ -43,22 +43,22 @@
                                     </label>
                         </div>
 
-                       
 
-                        
+
+
                         <button type="submit" class="btn btn-primary btn-lg btn-block">
                             {{ __('Login') }}
                         </button>
 
                         @if (Route::has('password.request'))
-                            
+
 
                             <div class="bottom">
-                                <span class="helper-text"><i class="fa fa-lock"></i> <a href="{{ route('password.request') }}">Forgot password?</a> OR <a href="{{ route('register') }}">Register</a></span>
+                                <span class="helper-text"><i class="fa fa-lock"></i> <a href="{{ route('password.request') }}">Forgot password?</a> OR <a href="{{ route('register') }}">Signup</a></span>
                             </div>
 
                         @endif
-                            
+
                     </form>
-                
+
 @endsection

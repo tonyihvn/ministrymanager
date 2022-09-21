@@ -17,6 +17,27 @@ class SettingsController extends Controller
         //
     }
 
+    public function settingsPublic(request $request){
+
+        $settings_id = settings::updateOrCreate(['id'=>$request->id],[
+            'ministry_name' => $request->ministry_name,
+            'motto' => $request->motto,
+            'address' => $request->address,
+            'mode'=>$request->mode,
+            'ministrygroup_id'=>$request->ministrygroup_id,
+            'user_id'=>1
+        ]);
+
+        audit::create([
+          'action'=>"New Ministry Created !".$request->ministry_name,
+          'description'=>'Update!',
+          'doneby'=>1,
+          'settings_id'=>$settings_id,
+        ]);
+        $message = "The Ministry and User Account has been created please wait while we verify it updated!";
+        return redirect()->back()->with(['message'=>$message]);
+      }
+
     /**
      * Show the form for creating a new resource.
      *

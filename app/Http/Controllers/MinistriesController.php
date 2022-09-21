@@ -50,7 +50,7 @@ class MinistriesController extends Controller
         $ministries = ministries::paginate(50);
         $users = User::select('id','name');
         audit::create([
-            'action'=>"A Ministry was created/modified".$request->name,
+            'action'=>"A Ministry was created/modified ".$request->name,
             'description'=>'Create/modify',
             'doneby'=>Auth()->user()->id,
             'settings_id'=>Auth()->user()->settings_id

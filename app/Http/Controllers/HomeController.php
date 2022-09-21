@@ -47,11 +47,11 @@ class HomeController extends Controller
             }
         }
         if(($role=="Admin") || (Auth()->user()->role=="Super")){
-            $attendance = attendance::where('activity','Sunday Service')->offset(0)->take(10)->get();
+            $attendance = attendance::where('activity','Sunday Service')->where('settings_id',Auth()->user()->settings_id)->offset(0)->take(10)->get();
 
-            $midweekquery = attendance::where('activity','Midweek Services')->offset(0)->take(10)->get();
+            $midweekquery = attendance::where('activity','Midweek Services')->where('settings_id',Auth()->user()->settings_id)->offset(0)->take(10)->get();
 
-            $uprogrammes = programmes::latest()->where('category','Upcoming')->select('id','title','from','to','ministry')->paginate(5);
+            $uprogrammes = programmes::latest()->where('category','Upcoming')->where('settings_id',Auth()->user()->settings_id)->select('id','title','from','to','ministry')->paginate(5);
 
             $dates = ''; $totals = ''; $midweek = ''; $midweektotals = '';
 
@@ -80,10 +80,9 @@ class HomeController extends Controller
             return view('home', compact('dates','midweek','totals','uprogrammes','midweektotals'))->with('message','Role is :'.$role);
         }else{
             $programmes = programmes::latest()->paginate(10);
-            return view('member_home',compact('programmes'))->with('message','Role is :'.$role);;
 
+            return view('member_home',compact('programmes'));
         }
-
 
      }
 
@@ -98,33 +97,29 @@ class HomeController extends Controller
 
     {
       $members = User::all()->where('settings_id',Auth::user()->settings_id);
-      $users = User::select('name','id')->get();
-      return view('members', compact('members','users'));
+      return view('members', compact('members'));
     }
 
     public function membersSearch(request $request)
     {
       $members = User::where('name', $request->keyword)->orWhere('name', 'like', '%' . $request->keyword . '%')->get();
-      $users = User::select('name','id')->get();
       return view('members', compact('members','users'));
     }
 
     public function member($id)
     {
       $member = User::where('id',$id)->first();
-      $users = User::select('id','name','phone_number')->get(); // Be specific to member assigned to and invited by
       $tasks = tasks::where('assigned_to',$id)->get();
       $followups = followups::where('member',$id)->get();
 
-      return view('member', compact('member','users','tasks','followups'));
+      return view('member', compact('member','tasks','followups'));
     }
 
     public function addNew()
     {
-      $users = User::select('name','id')->get();
-      $house_fellowships = housefellowhips::select('name','id')->get();
-      $ministries = ministries::select('name','id')->get();
-      return view('add-new', compact('users','ministries','house_fellowships'));
+      $house_fellowships = housefellowhips::select('name','id')->where('settings_id',Auth()->user()->settings_id)->get();
+      $ministries = ministries::select('name','id')->where('settings_id',Auth()->user()->settings_id)->get();
+      return view('add-new', compact('ministries','house_fellowships'));
 
     }
 
@@ -194,10 +189,9 @@ class HomeController extends Controller
     public function editMember($id)
     {
       $user = User::where('id',$id)->first();
-      $users = User::select('id','name')->get();
-      $house_fellowships = housefellowhips::select('name','id')->get();
-      $ministries = ministries::select('name','id')->get();
-      return view('edit-member', compact('user','users','ministries','house_fellowships'));
+      $house_fellowships = housefellowhips::select('name','id')->where('settings_id',Auth()->user()->settings_id)->get();
+      $ministries = ministries::select('name','id')->where('settings_id',Auth()->user()->settings_id)->get();
+      return view('edit-member', compact('user','ministries','house_fellowships'));
 
     }
 
@@ -237,18 +231,21 @@ class HomeController extends Controller
 
         $creditbalance = ltrim(substr($cbal,3),' ');
 
-        $members = User::select('name','status','ministry','phone_number')->get();
+        $members = User::select('name','status','ministry','phone_number')->where('settings_id',Auth()->user()->settings_id)->get();
         $allnumbers = "";
         $lastrecord = end($members);
-        $lastkey = key($lastrecord);
+
+        // $lastkey = key($lastrecord);
 
         foreach($members as $key => $mnumber){
           $number = $mnumber->phone_number;
-          if($number=="")
+          if($number==""){
             continue;
+          }
 
-          if(substr($number,0,1)=="0")
+          if(substr($number,0,1)=="0"){
             $number="234".ltrim($number,'0');
+          }
 
           $allnumbers.=$number.",";
           /*
@@ -293,7 +290,7 @@ class HomeController extends Controller
 
       // v20ylRY3Gp6jYEAvpaDtOQQTqwoCqc1n4CUG3IBboIMTciDeVk	  -  Token for smartsms solutions
 
-      $members = User::select('name','status','ministry','phone_number')->get();
+      $members = User::select('name','status','ministry','phone_number')->where('settings_id',Auth()->user()->settings_id)->get();
       $allnumbers = "";
       $lastrecord = end($members);
       $lastkey = key($lastrecord);
@@ -325,7 +322,7 @@ class HomeController extends Controller
 
       // ADD AUDIT HERE
       audit::create([
-        'action'=>"Informations where sent to members",
+        'action'=>"Message where sent to members",
         'description'=>'Sent Information',
         'doneby'=>Auth()->user()->id,
         'settings_id'=>Auth()->user()->settings_id,
@@ -422,7 +419,7 @@ class HomeController extends Controller
 
     public function audits()
     {
-      $audits = audit::orderBy('id', 'DESC')->paginate(10);
+      $audits = audit::where('settings_id',Auth()->user()->settings_id)->orderBy('id', 'DESC')->paginate(10);
       return view('audits', compact('audits'));
     }
 

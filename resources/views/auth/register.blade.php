@@ -9,28 +9,65 @@
                         <div class="card-body">
 
 
+
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="form-group col-lg-12">
                                         <select class="form-control" name="settings_id" id="settings_id">
 
-                                            <option value="1" selected>Select Ministry</option>
+                                            <option value="1" selected>Select Church</option>
 
                                             @foreach ($ministrygroups as $ministrygroup)
-
                                                     @foreach ($ministrygroup->settings as $usrmin)
                                                         <option value="{{$usrmin->id}}">{{$usrmin->ministry_name}}</option>
                                                     @endforeach
-
                                             @endforeach
-
+                                            <option value="None" style="color: darkOrange;">Not Listed? Add New Church</option>
 
                                         </select>
                                     </div>
                                 </div>
+
+                                <div id="newministry_box">
+                                    <span style="color: darkOrange; font-size: 0.8em;">&Not; Note: This ministry will undergo verification process</span>
+
+                                    <input type="hidden" name="newministry" id="newministry" value="Yes">
+
+                                    <div class="form-group col-md-12">
+                                        <label for="ministrygroup_id"  class="control-label ">Ministry</label>
+                                        <select class="form-control" name="ministrygroup_id" id="ministrygroup_id">
+
+                                            @foreach ($ministrygroups as $mg)
+                                                <option value="{{$mg->id}}">{{$mg->ministry_group_name}}</option>
+                                            @endforeach
+                                            <option value="1">Others</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label for="ministry_name">Church Name</label>
+                                        <input type="text" name="ministry_name" id="ministry_name" class="form-control" value="{{$settings->ministry_name}}">
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label for="motto">Motto</label>
+                                        <input type="text" name="motto" id="motto" class="form-control" value="{{$settings->motto}}">
+                                    </div>
+
+                                    <div class="form-group  col-md-12">
+                                        <label for="min_address">Address</label>
+                                        <input type="text" name="min_address" id="min_address" class="form-control" value="{{$settings->address}}">
+                                    </div>
+
+                                    <input type="hidden" name="mode" value="InActive">
+
+
+                                </div>
+
                                 <div class="row">
-                                    <div class="form-group col-lg-12">
+                                    <h4>User Info</h4><div class="form-group col-lg-12">
                                         <label for="name" class="control-label sr-only">{{ __('Name') }}</label>
                                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus placeholder="Full Name">
 
@@ -140,10 +177,9 @@
 
                                         <button type="submit" class="btn btn-primary">
                                             {{ __('Sign Up') }}
-                                        </button>
-                                        <a href="/login"><p class="btn btn-primary">
-                                            Sign-in
-                                        </p></a>
+                                        </button> <br>
+                                        Already had an account? <a href="{{url('login')}}">Login</a>
+
                                 </div>
 
                             </form>

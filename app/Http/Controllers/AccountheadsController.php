@@ -15,7 +15,7 @@ class AccountheadsController extends Controller
      */
     public function index()
     {
-        $accountheads = accountheads::all();
+        $accountheads = accountheads::where('settings_id',Auth()->user()->settings_id)->get();
 
         return view('account-heads', compact('accountheads'));
     }

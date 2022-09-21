@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             {
                 $view->with('login_user', Auth::user());
                 $view->with('mytasks', tasks::where('assigned_to',Auth::user()->id)->where('status','Not Completed')->get());
-                $view->with('hmembers', User::select('id','name','status')->where('settings_id',Auth::user()->id)->get());
+                $view->with('hmembers', User::select('id','name','status','phone_number')->where('settings_id',Auth::user()->settings_id)->get());
                 $view->with('userministries',settings::select('id','ministry_name','ministrygroup_id')->where('user_id',Auth::user()->id)->get());
 
                 $view->with('settings', settings::where('id',Auth::user()->settings_id)->first());

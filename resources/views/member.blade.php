@@ -1,7 +1,7 @@
 @extends('layouts.theme')
 
 @section('content')
-
+@php $users = $hmembers; @endphp
 
     <h3 class="page-title">{{$member->name}} | <small style="color: green">{{$member->status}}</small></h3>
     <div class="row">

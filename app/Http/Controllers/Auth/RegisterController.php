@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\audit;
+use App\Models\settings;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -77,6 +78,28 @@ class RegisterController extends Controller
 
         }
 
+        if(isset($data['ministry_name'])){
+
+            $settings_id = settings::create([
+                'ministry_name' => $data['ministry_name'],
+                'motto' => $data['motto'],
+                'address' => $data['min_address'],
+                'mode'=>$data['mode'],
+                'ministrygroup_id'=>$data['ministrygroup_id'],
+                'user_id'=>1
+            ] )->id;
+
+        }else{
+            $settings_id = $data['settings_id'];
+        }
+
+        audit::create([
+            'action'=>"New User Registration ".$data['email'],
+            'description'=>'A new user was registered',
+            'doneby'=>"Auto", // Auth::user()->id
+            'settings_id'=>$settings_id
+        ]);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -88,21 +111,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'role'=>"Member",
             'status'=>"InActive",
-            'settings_id'=>$data['settings_id']
+            'settings_id'=>$settings_id
         ]);
-
-        audit::create([
-            'action'=>"New User Registration".$data['name'],
-            'description'=>'A new user was registered',
-            'doneby'=>"Auto" // Auth::user()->id
-        ]);
-
-        /*
-        $phone_number = $data['phone_number'];
-        $email = $data['email'];
-        $name = $data['name'];
-
-        return view('login', compact('phone_number','name','email'));
-        */
     }
 }

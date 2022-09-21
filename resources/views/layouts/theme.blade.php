@@ -46,7 +46,7 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand row">
 				<div class="col-lg-3">
-					<a href="/home"> <img  src="/images/{{$settings->logo}}" alt="{{$settings->motto}}" class="img-responsive logo" style="height: auto !important; width: 100%; position: relative; padding: 0px;"></a>
+					<a href="/home"> <img  src="/images/{{$settings->logo}}" class="img-responsive logo" style="height: auto !important; width: 100%; position: relative; padding: 0px;"></a>
 				</div>
 				<div class="col-lg-9">
 					<a href="/home"><b style="color: {{$settings->color}};">{{$settings->ministry_name}}</b></a><br>
@@ -57,17 +57,19 @@
 				<div class="navbar-btn">
 					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
 				</div>
+                @if ((Auth()->user()->role=="Admin") || (Auth()->user()->role=="Super"))
+                    <form class="navbar-form navbar-left" action="{{ route('searchmembers') }}" method="post">
+                        @csrf
+                        <div class="input-group">
+                            <input type="text" value="" name="keyword" class="form-control" placeholder="Search Members...">
+                            <span class="input-group-btn"><button type="submit" class="btn btn-primary">Go</button></span>
+                        </div>
+                    </form>
 
-				<form class="navbar-form navbar-left" action="{{ route('searchmembers') }}" method="post">
-					@csrf
-					<div class="input-group">
-						<input type="text" value="" name="keyword" class="form-control" placeholder="Search Members...">
-						<span class="input-group-btn"><button type="submit" class="btn btn-primary">Go</button></span>
-					</div>
-				</form>
-				<div class="navbar-btn navbar-btn-right">
-					<a class="btn btn-success update-pro" href="/add-new" title="New Member" target="_blank"><span class="fa fa-user-plus"></span> <span>New Member</span></a>
-				</div>
+                    <div class="navbar-btn navbar-btn-right">
+                        <a class="btn btn-success update-pro" href="/add-new" title="New Member" target="_blank"><span class="fa fa-user-plus"></span> <span>New Member</span></a>
+                    </div>
+                @endif
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -93,10 +95,12 @@
 							<ul class="dropdown-menu">
 								<li><a href="/member/{{$login_user->id}}"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="/tasks"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
-								<li><a href="#"  data-toggle="modal" data-target="#settings"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-                                <li><a href="#"  data-toggle="modal" data-target="#switchministry"><i class="lnr lnr-sync"></i> <span>Switch Ministry/Church</span></a></li>
-                                <li><a href="/audits"><i class="lnr lnr-list"></i> <span>Audit Trails</span></a></li>
-                                <li><a href="/help"><i class="lnr lnr-help"></i> <span>Help</span></a></li>
+                                @if ((Auth()->user()->role=="Admin") || (Auth()->user()->role=="Super"))
+                                    <li><a href="#"  data-toggle="modal" data-target="#settings"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+                                    <li><a href="#"  data-toggle="modal" data-target="#switchministry"><i class="lnr lnr-sync"></i> <span>Switch Ministry/Church</span></a></li>
+                                    <li><a href="/audits"><i class="lnr lnr-list"></i> <span>Audit Trails</span></a></li>
+                                @endif
+                                <li><a href="/help"><i class="lnr lnr-heart"></i> <span>Help</span></a></li>
 								<li><a href="/logout"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
 							</ul>
 						</li>
@@ -332,6 +336,8 @@
 
 
             </form>
+
+
         </div>
 
         <!-- Modal footer -->

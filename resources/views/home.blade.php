@@ -11,8 +11,8 @@
             </div>
             <div class="panel-body">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-6">
+                    <div class="row" style="position: relative;">
+                        <div class="col-lg-2 col-sm-6">
                             <div class="card-box bg-blue">
                                 <div class="inner">
                                     <h3> {{$hmembers->count()}} </h3>
@@ -25,7 +25,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-2 col-sm-6">
                             <div class="card-box bg-green">
                                 <div class="inner">
                                     <h3> {{$hmembers->where('status','New Member')->count()}} </h3>
@@ -37,7 +37,7 @@
                                 <a href="/members" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-2 col-sm-6">
                             <div class="card-box bg-orange">
                                 <div class="inner">
                                     <h3> {{$hmembers->where('status','Worker')->count()}} </h3>
@@ -49,7 +49,7 @@
                                 <a href="/members" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-2 col-sm-6">
                             <div class="card-box bg-red">
                                 <div class="inner">
                                     <h3> {{$mytasks->count()}} </h3>
@@ -127,7 +127,7 @@
                 position: relative;
                 color: #fff;
                 padding: 20px 10px 40px;
-                margin: 20px 0px;
+                margin: 30px 0px;
             }
             .card-box:hover {
                 text-decoration: none;

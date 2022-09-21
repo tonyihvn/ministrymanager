@@ -1,7 +1,7 @@
 @extends('layouts.theme')
 
 @section('content')
-    @php $pagetype="report"; @endphp
+    @php $pagetype="report"; $users = $members; @endphp
 
     <h3 class="page-title">Members | <small style="color: green">All Members</small></h3>
     <div class="row">

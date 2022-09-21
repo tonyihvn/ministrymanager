@@ -1,5 +1,5 @@
 @extends('layouts.theme')
-
+@php $users = $hmembers; @endphp
 @section('content')
                     <h3 class="page-title">Add New Members </h3>
 

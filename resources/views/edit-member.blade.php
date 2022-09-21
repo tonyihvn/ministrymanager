@@ -1,5 +1,5 @@
 @extends('layouts.theme')
-
+@php $users = $hmembers @endphp
 @section('content')
 
                     <div class="card">

@@ -16,7 +16,7 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        $attendance = attendance::paginate(50);
+        $attendance = attendance::where('settings_id',Auth()->user()->settings_id)->paginate(50);
 
         return view('attendance', compact('attendance'));
 

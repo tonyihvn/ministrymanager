@@ -67,7 +67,7 @@
                         <p class="card-text">Date:
                             {{$prog->from==$prog->to?$prog->from:$prog->from." to ".$prog->to}} <br>
 
-                            {!!substr(!! $prog->details !!,0,10) . "..."!!}
+                            {!!substr($prog->details,0,10) . "..."!!}
                         </p>
                         <a href="/post/{{$prog->id}}" class="btn btn-primary">Read More</a>
                         </div>

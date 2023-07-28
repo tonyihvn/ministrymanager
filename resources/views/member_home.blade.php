@@ -1,7 +1,7 @@
 @extends('layouts.theme')
 
 @section('content')
-    @php $pagename="member_home";@endphp
+    @php $pagename="member_home"; @endphp
 
 
                 @if ($mytasks->count() > 0)
@@ -57,7 +57,7 @@
 
                 @endif
                 @foreach ($programmes as $prog)
-                    <div class="card" style="background-color: white; padding: 10px;">
+                    <div class="card" style="background-color: white; padding: 5px;">
                         @isset($prog->picture)
                             <img src="{{asset('/images/'.$prog->picture)}}"  class="card-img-top" alt="{{$settings->logo}}">
                         @endisset
@@ -87,7 +87,8 @@
             flex-direction: row;
             }
             .card img {
-            width: 30%;
+            width: 100%;
+            height: auto;
             }
     </style>
 

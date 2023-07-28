@@ -91,7 +91,7 @@
 
                                         <div class="form-group row">
                                             <label for="house_fellowship"  class="control-label ">Closest House Fellowship</label>
-                                            <select class="form-control" name="house_fellowship" id="house_fellowship">
+                                            <select class="form-control select2" name="house_fellowship" id="house_fellowship">
                                             <option value="">Closest House Fellowship</option>
                                             <option value="{{ $user->house_fellowship }}" selected>{{ $user->house_fellowship }}</option>
                                             @foreach ($house_fellowships as $hfellowship)
@@ -104,7 +104,7 @@
 
                                         <div class="form-group row">
                                             <label for="invited_by"  class="control-label ">Invited By</label>
-                                            <select class="form-control" name="invited_by" id="invited_by">
+                                            <select class="form-control select2" name="invited_by" id="invited_by">
                                                 <option value="" >Invited By</option>
                                                 <option value="{{ $user->invited_by }}" selected>{{ $user->invited_by!="" ? \App\Models\User::select('name')->where('id',$user->invited_by)->first()->name :'' }}</option>
                                                 @foreach ($users as $usr)
@@ -116,7 +116,7 @@
 
                                         <div class="form-group row">
                                             <label for="assigned_to"  class="control-label ">Assigned To</label>
-                                            <select class="form-control" name="assigned_to" id="assigned_to">
+                                            <select class="form-control select2" name="assigned_to" id="assigned_to">
                                                 <option value="{{ $user->assigned_to }}" selected>{{  $user->assigned_to !="" ?  \App\Models\User::select('name')->where('id',$user->assigned_to)->first()->name :'' }}</option>
                                                 @foreach ($users as $usr)
                                                     <option value="{{$usr->id}}">{{$usr->name}}</option>
@@ -131,7 +131,7 @@
 
                                         <div class="form-group row">
                                             <label for="ministry"  class="control-label ">Ministry</label>
-                                            <select class="form-control" name="ministry" id="ministry">
+                                            <select class="form-control select2" name="ministry" id="ministry">
                                             <option value="{{ $user->ministry }}" selected>{{ $user->ministry }}</option>
                                             @foreach ($ministries as $ministry)
                                                 <option value="{{$ministry->name}}">{{$ministry->name}}</option>

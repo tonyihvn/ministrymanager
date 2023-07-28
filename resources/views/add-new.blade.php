@@ -99,7 +99,7 @@
 
                                         <div class="form-group row">
                                             <label for="invited_by"  class="control-label sr-only">Invited By</label>
-                                            <select class="form-control" name="invited_by" id="invited_by">
+                                            <select class="form-control select2" name="invited_by" id="invited_by">
                                                 <option value="" selected>Invited By</option>
                                                 @foreach ($users as $user)
                                                     <option value="{{$user->id}}">{{$user->name}}</option>
@@ -110,7 +110,7 @@
 
                                         <div class="form-group row">
                                             <label for="assigned_to"  class="control-label sr-only">Assigned To</label>
-                                            <select class="form-control" name="assigned_to" id="assigned_to">
+                                            <select class="form-control select2" name="assigned_to" id="assigned_to">
                                                 <option value="" selected>Assigned To</option>
                                                 @foreach ($users as $user)
                                                     <option value="{{$user->id}}">{{$user->name}}</option>

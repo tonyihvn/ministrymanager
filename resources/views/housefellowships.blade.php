@@ -101,7 +101,7 @@
 
                 <div class="form-group">
                     <label for="leader" class="control-label">Leader</label>
-                    <select class="form-control" name="leader" id="leader">
+                    <select class="form-control select2" name="leader" id="leader">
                         <option value="" selected>Leader</option>
                         @foreach ($users as $user)
                             <option value="{{$user->id}}">{{$user->name}}</option>

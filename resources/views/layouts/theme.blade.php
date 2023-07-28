@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/linearicons/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/chartist/css/chartist-custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/jquery-ui/jquery-ui.min.css') }}">
+
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
@@ -25,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('/css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet"
         href="{{ asset('https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/select2.css') }}">
     <style>
         .brand {
             padding: 10px 5px 5px 10px !important;
@@ -278,6 +280,8 @@
     <script src="{{ asset('/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('/assets/scripts/klorofil-common.js') }}"></script>
     <script src="{{ asset('/assets/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('/assets/scripts/select2.js') }}"></script>
+
 
 
 </body>
@@ -607,6 +611,10 @@
 
 
 <script>
+    $('.select2').select2({
+        theme: "classic"
+    });
+
     function accountHead(accid) {
 
 

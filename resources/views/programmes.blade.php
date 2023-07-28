@@ -133,7 +133,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="ministry" class="control-label">Organizer / Host</label>
-                        <select class="form-control" name="ministry" id="ministry">
+                        <select class="form-control select2" name="ministry" id="ministry">
                             <option value="Church" selected>Church</option>
                             @foreach ($ministries as $mins)
                                 <option value="{{$mins->name}}">{{$mins->name}}</option>

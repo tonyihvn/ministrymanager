@@ -192,6 +192,7 @@
                             <div id="subPages5" class="collapse ">
                                 <ul class="nav">
                                     <li><a href="/programmes" class="">Manage Programmes</a></li>
+                                    <li><a href="/activities" class="">Manage Activities</a></li>
 
                                 </ul>
                             </div>

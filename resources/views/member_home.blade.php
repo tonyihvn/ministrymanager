@@ -4,7 +4,7 @@
     @php $pagename="member_home";@endphp
 
 
-                @if (isset($mytasks->count() > 0))
+                @if ($mytasks->count() > 0)
                     <h3>My Assigned Tasks</h3>
                     <div class="row">
                         <div class="panel">

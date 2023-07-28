@@ -37,6 +37,14 @@
             height: 0px;
             background-color: none !important;
         }
+
+
+        @media screen and (max-width: 600px) {
+            .page-title {
+            margin-top: -70px;
+            margin-bottom:5px;
+        }
+        }
     </style>
 </head>
 

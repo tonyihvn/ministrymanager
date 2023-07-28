@@ -57,18 +57,19 @@
 
                 @endif
                 @foreach ($programmes as $prog)
-                    <div class="card" style="background-color: white;">
+                    <div class="card" style="background-color: white; padding: 10px;">
                         @isset($prog->picture)
                             <img src="{{asset('/images/'.$prog->picture)}}"  class="card-img-top" alt="{{$settings->logo}}">
                         @endisset
 
                         <div class="card-body">
                         <h5 class="card-title"><a href="/post/{{$prog->id}}"><b>{{$prog->title}}</b></h5>
-                        <p class="card-text">
-                            <b>{{$prog->from==$prog->to?$prog->from:$prog->from." to ".$prog->to}}</b>
-                            {!! mb_strimwidth($prog->details,0,100,'...') !!}
+                        <p class="card-text">Date:
+                            {{$prog->from==$prog->to?$prog->from:$prog->from." to ".$prog->to}} <br>
+
+                            {!!substr(!! $prog->details !!,0,10) . "..."!!}
                         </p>
-                        <a href="/post/{{$prog->id}}" class="btn btn-primary float-right">Read More</a>
+                        <a href="/post/{{$prog->id}}" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
                 @endforeach

@@ -110,7 +110,7 @@
         $('#newministry_box').hide();
 
         $('#settings_id').change(function(){
-            if($(this).val() == 'None'){ // or this.value == 'volvo'
+            if($(this).val() == 'None'){
                 $('#newministry_box').toggle();
             }else{
                 $('#newministry_box').hide();

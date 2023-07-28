@@ -17,6 +17,7 @@
 
 
                                         <div class="row">
+                                            <div class="form-group">
                                             <label for="name" class="control-label sr-only">{{ __('Name') }}</label>
 
 
@@ -27,6 +28,7 @@
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
+                                            </div>
 
                                         </div>
 

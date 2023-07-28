@@ -14,13 +14,13 @@
                     <table class="table  responsive-table" id="products">
                         <thead>
                             <tr style="color: ">
-                                <th width="20">#</th>
+                                <th width="20" class="d-none d-md-block">#</th>
                                 <th>Full Name</th>
                                 <th>Status</th>
-                                <th>Ministry</th>
-                                <th>Phone Number</th>
-                                <th>Assigned To</th>
-                                <th>Location</th>
+                                <th class="d-none d-md-block">Ministry</th>
+                                <th class="d-none d-md-block">Phone Number</th>
+                                <th class="d-none d-md-block">Assigned To</th>
+                                <th class="d-none d-md-block">Location</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -32,16 +32,16 @@
                                         style="background-color: azure !important;"
                                     @endif
                                 >
-                                    <td>{{$member->id}}</td>
+                                    <td class="d-none d-md-block">{{$member->id}}</td>
                                     <td>{{$member->name}}</td>
                                     <td>{{$member->status}}</td>
-                                    <td>{{$member->ministry}}</td>
-                                    <td>{{$member->phone_number}}</td>
+                                    <td class="d-none d-md-block">{{$member->ministry}}</td>
+                                    <td class="d-none d-md-block">{{$member->phone_number}}</td>
 
-                                    <td>{{($member->assigned_to) == '' ? 'Not Assigned' : (is_numeric($member->assigned_to)?$users->where('id',$member->assigned_to)->first()->name:$member->assigned_to)}}</td>
+                                    <td class="d-none d-md-block">{{($member->assigned_to) == '' ? 'Not Assigned' : (is_numeric($member->assigned_to)?$users->where('id',$member->assigned_to)->first()->name:$member->assigned_to)}}</td>
 
-                                    <td>{{$member->location}}</td>
-                                    <td width="90">
+                                    <td class="d-none d-md-block">{{$member->location}}</td>
+                                    <td>
                                         <div class="btn-group">
                                             <a href="/edit-member/{{$member->id}}" class="label label-primary left"><i class="lnr lnr-pencil"></i></a>
                                             <a href="/member/{{$member->id}}/" class="label label-success"><i class="lnr lnr-eye"></i></a>

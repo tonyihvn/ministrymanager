@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\programmes;
 use Illuminate\Http\Request;
 use App\Models\ministries;
+use App\Models\housefellowhips;
+
 use App\Models\audit;
 
 class ProgrammesController extends Controller
@@ -18,9 +20,11 @@ class ProgrammesController extends Controller
     {
 
         $ministries = ministries::select('name')->get();
+        $housefellowships = housefellowhips::select('name')->get();
+
         $programmes = programmes::latest()->paginate(10);
 
-        return view('programmes', compact('programmes','ministries'));
+        return view('programmes', compact('programmes','ministries','housefellowships'));
 
     }
 
@@ -74,6 +78,7 @@ class ProgrammesController extends Controller
         ]);
         $ministries = ministries::select('name')->get();
         $programmes = programmes::paginate(10);
+        $housefellowships = housefellowhips::select('name')->get();
 
         audit::create([
             'action'=>"A Post was Scheduled/modified ".$request->title,
@@ -84,7 +89,7 @@ class ProgrammesController extends Controller
 
         $message = "<div class='alert alert-dismissable alert-info'>The post created or modified successfully</div>";
 
-        return view('programmes', compact('programmes','ministries'))->with(['message'=>$message]);
+        return view('programmes', compact('programmes','ministries','housefellowships'))->with(['message'=>$message]);
     }
 
     public function post($id)
@@ -99,6 +104,14 @@ class ProgrammesController extends Controller
         ]);
         $message = "The Programme has being created/modified successfully";
         return view('post', compact('program','message'));
+    }
+
+    public function hfActivities($hfid)
+    {
+        $hfname = housefellowhips::select('name')->where('id',$hfid)->first()->name;
+        $programmes = programmes::where('ministry',$hfname)->get();
+
+        return view('hfactivities', compact('programmes'));
     }
 
     /**

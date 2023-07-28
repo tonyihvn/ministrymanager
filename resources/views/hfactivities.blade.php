@@ -3,7 +3,7 @@
 @section('content')
     @php $modal="programme"; $pagename = "programmes"; @endphp
 
-    <h3 class="page-title">Publish | <small style="color: green">Posts/ Programmes / Events</small></h3>
+    <h3 class="page-title">{{$programmes->first()->name ?? ''}}<small style="color: green">Activities</small></h3>
     <div class="row">
             <div class="panel">
                 <div class="panel-heading">
@@ -18,13 +18,9 @@
                     <table class="table  responsive-table">
                         <thead>
                             <tr style="color: ">
-                                <th>Banner</th>
+
                                 <th>Title</th>
                                 <th>Date</th>
-                                <th>Type</th>
-                                <th>Category</th>
-                                <th>Host</th>
-                                <th>Action</th>
 
                             </tr>
                         </thead>
@@ -32,23 +28,10 @@
                             @foreach ($programmes as $prog)
 
                                 <tr>
-                                    <td width="10%">
 
-
-                                        <a href="/post/{{$prog->id}}">
-                                            <img src="{{asset('/images/'.$prog->picture)}}"  alt="{{$settings->logo}}" width="100%" height="auto">
-                                        </a>
-                                    </td>
                                     <td><a href="/post/{{$prog->id}}"><b>{{$prog->title}}</b></td>
                                     <td><b>{{$prog->from==$prog->to?$prog->from:$prog->from." to ".$prog->to}}</b></td>
-                                    <td>{{$prog->type}}</td>
-                                    <td>{{$prog->category}}</td>
-                                    <td>{{$prog->ministry}}</td>
-                                    <td>
 
-                                        <button class="label label-primary" id="ach{{$prog->id}}" onclick="programme({{$prog->id}})"  data-toggle="modal" data-target="#programme" data-title="{{$prog->title}}" data-type="{{$prog->type}}" data-from="{{$prog->from}}" data-from="{{$prog->from}}"  data-to="{{$prog->to}}"  data-details="{{$prog->details}}"  data-category="{{$prog->category}}"  data-picture="{{$prog->picture}}"  data-ministry="{{$prog->ministry}}" data-pic="{{$prog->picture}}">Edit</button>
-                                    <a href="/delete-prog/{{$prog->id}}" class="label label-danger"  onclick="return confirm('Are you sure you want to delete the post: {{$prog->title}}?')">Delete</a>
-                                    </td>
 
                                 </tr>
                             @endforeach
@@ -134,14 +117,8 @@
                     <div class="form-group col-md-6">
                         <label for="ministry" class="control-label">Organizer / Host</label>
                         <select class="form-control" name="ministry" id="ministry">
-                            <option value="Church" selected>Church</option>
-                            @foreach ($ministries as $mins)
-                                <option value="{{$mins->name}}">{{$mins->name}}</option>
-                            @endforeach
 
-                            @foreach ($housefellowships as $hfs)
-                                <option value="{{$hfs->name}}">{{$hfs->name}}</option>
-                            @endforeach
+                                <option value="{{$programmes->first()->name??''}}">{{$programmes->first()->name??''}}</option>
 
                         </select>
                     </div>

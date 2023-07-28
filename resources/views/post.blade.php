@@ -1,6 +1,7 @@
 @extends('layouts.theme')
 
 <style>
+
     #gradientbg {
         background-image:
         linear-gradient(to bottom, rgba(8, 19, 87, 0.52), rgba(3, 3, 3, 0.93)),
@@ -10,11 +11,25 @@
         background-repeat: no-repeat;
         padding-top: 300px;
     }
+    @if (!$program->picture)
+        #gradientbg {
+            padding-top: 10px;
+        }
+    @endif
 </style>
 @section('content')
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="page-title">{{$program->title}}</h3>
+            </div>
+            <div class="col-md-6">
+                <small><b><i>Category: </i></b></small><small style="color: green;">{{$program->type}} - {{$program->category}} </small> |                     <b>Date: </b> @if ($program->from==$program->to) {{$program->from}} @else  From: {{$program->from." To: ".$program->to}} @endif <br>
 
-    <h3 class="page-title">{{$program->title}} | <small><b><i>Category: </i></b></small><small style="color: green;">{{$program->type}} - {{$program->category}} </small></h3>
+            </div>
+        </div>
+
     <div class="row" id="gradientbg">
+
 
             <div class="panel" style="background: white; opacity: 0.7;">
             {{--
@@ -46,7 +61,7 @@
                 </div>
             --}}
                 <div class="panel-heading">
-                        @if ($program->type!="News")
+                        @if ($program->type!="News" && $program->type!="Activity Report" && $program->category=="Upcoming")
                             <b>Host: </b> {{$program->ministry}}
 
                             <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#programme">I will be There</a>
@@ -55,7 +70,6 @@
 
                 </div>
                 <div class="panel-body">
-                    <b>Date: </b> @if ($program->from==$program->to) {{$program->from}} @else  From: {{$program->from." To: ".$program->to}} @endif <br>
 
                     {!! $program->details !!}
                 </div>

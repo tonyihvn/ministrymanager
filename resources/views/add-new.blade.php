@@ -207,7 +207,7 @@
                                                 <option value="Member" selected>Member</option>
                                                 <option value="Admin">Admin</option>
                                                 <option value="Usher">Usher</option>
-                                                <option value="Followup">Followup</option>
+                                                <option value="Followup">Evangelist/Followup Member</option>
                                                 <option value="Finance">Finance</option>
                                                 @if ($settings->mode=="Maintenance")
                                                 <option value="Super">Super</option>

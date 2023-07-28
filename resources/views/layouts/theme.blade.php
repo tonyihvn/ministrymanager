@@ -71,7 +71,7 @@
                     </div>
                 </div>
 
-                @if (Auth()->user()->role == 'Admin' || Auth()->user()->role == 'Super')
+                @if (Auth()->user()->role == 'Admin' || Auth()->user()->role == 'Super'  || Auth()->user()->role == 'Followup')
                     <form class="navbar-form navbar-left" action="{{ route('searchmembers') }}" method="post">
                         @csrf
                         <div class="input-group">
@@ -200,7 +200,6 @@
                             <div id="subPages5" class="collapse ">
                                 <ul class="nav">
                                     <li><a href="/programmes" class="">Manage Programmes</a></li>
-                                    <li><a href="/activities" class="">Manage Activities</a></li>
 
                                 </ul>
                             </div>

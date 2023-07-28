@@ -77,6 +77,9 @@ Route::post('/addprogramme', [App\Http\Controllers\ProgrammesController::class, 
 Route::get('/post/{id}', [App\Http\Controllers\ProgrammesController::class, 'post'])->name('post');
 Route::get('/delete-prog/{id}', [App\Http\Controllers\ProgrammesController::class, 'destroy'])->name('delete-prog')->middleware('role:Admin,Super,Pastor');
 
+Route::get('/hf-activities/{hfid}', [App\Http\Controllers\ProgrammesController::class, 'hfActivities'])->name('hf-activities');
+
+
 // COMMUNICATION
 Route::get('/communications', [App\Http\Controllers\HomeController::class, 'communications'])->name('communications')->middleware('role:Admin,Super,Pastor');
 Route::post('/sendsms', [App\Http\Controllers\HomeController::class, 'sendSMS'])->name('sendsms')->middleware('role:Admin,Super,Pastor');

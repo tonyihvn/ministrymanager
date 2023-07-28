@@ -80,7 +80,6 @@ class HomeController extends Controller
             return view('home', compact('dates','midweek','totals','uprogrammes','midweektotals'))->with('message','Role is :'.$role);
         }else{
             $programmes = programmes::latest()->paginate(10);
-
             return view('member_home',compact('programmes'));
         }
 

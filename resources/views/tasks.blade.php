@@ -70,7 +70,6 @@
                                 <th>Status</th>
                                 <th>Assigned To</th>
                                 <th>Set Status</th>
-
                             </tr>
                         </thead>
                         <tbody>

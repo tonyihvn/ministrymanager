@@ -31,9 +31,7 @@
 
                                     </tbody>
                                 </table>
-                                <div style="text-align: right">
-                                    {{ $mytasks->links('pagination::bootstrap-4') }}
-                                </div>
+
                                 <div class="row">
                                     <a href="{{urel('tasks')}}">View All Tasks</a>
                                 </div>

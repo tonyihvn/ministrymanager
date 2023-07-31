@@ -47,14 +47,13 @@
 
         @media screen and (max-width: 600px) {
             .page-title {
-            margin-top: -70px;
-            margin-bottom:5px;
-        }
+                margin-top: -70px;
+                margin-bottom:5px;
+            }
         }
 
         .panel{
             overflow-x: scroll;
-
         }
     </style>
 </head>
@@ -64,7 +63,6 @@
     <div id="wrapper">
         <!-- NAVBAR -->
         <nav class="navbar navbar-default navbar-fixed-top">
-
             <div class="container-fluid">
                 <div class="navbar-btn">
                     <button type="button" class="btn-toggle-fullwidth"><i
@@ -142,7 +140,6 @@
                                 <li><a href="/logout"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                             </ul>
                         </li>
-
                     </ul>
 
             </div>
@@ -153,7 +150,18 @@
             <div class="sidebar-scroll">
                 <nav>
                     <ul class="nav">
-                        <li><a href="/home" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a>
+                        <li><a href="/home" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+
+                        <li class="roledlink Worker Admin Followup Pastor Finance Super visible-xs visible-sm">
+                            <form class="navbar-form navbar-left" action="{{ route('searchmembers') }}" method="post">
+                                @csrf
+                                <div class="input-group">
+                                    <input type="text" value="" name="keyword" class="form-control"
+                                        placeholder="Search Members...">
+                                    <span class="input-group-btn"><button type="submit"
+                                            class="btn btn-primary">Go</button></span>
+                                </div>
+                            </form>
                         </li>
 
                         <li class="roledlink Worker Admin Followup Pastor Finance Super"

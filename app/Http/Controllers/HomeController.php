@@ -103,7 +103,7 @@ class HomeController extends Controller
     public function membersSearch(request $request)
     {
       $members = User::where('name', $request->keyword)->orWhere('name', 'like', '%' . $request->keyword . '%')->get();
-      return view('members', compact('members','users'));
+      return view('members', compact('members'));
     }
 
     public function member($id)

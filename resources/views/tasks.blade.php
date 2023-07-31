@@ -64,7 +64,7 @@
                         <thead>
                             <tr style="color: ">
                                 <th>Title</th>
-                                <th style="width: 35% !important;">Details</th>
+                                <th>Details</th>
                                 <th>Member Info</th>
                                 <th>Date</th>
                                 <th>Status</th>

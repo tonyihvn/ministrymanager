@@ -21,14 +21,14 @@
         left: -9999px;
         }
 
-        #no-more-tables tr { border: 1px solid #ccc; }
+        #no-more-tables tr { border: 1px solid #ccc; margin-bottom: 5px; }
 
         #no-more-tables td {
         /* Behave like a "row" */
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
-        padding-left: 50%;
+        padding-left: 20%;
         white-space: normal;
         text-align:left;
         }
@@ -39,7 +39,7 @@
         /* Top/left values mimic padding */
         top: 6px;
         left: 6px;
-        width: 45%;
+        width: 75%;
         padding-right: 10px;
         white-space: nowrap;
         text-align:left;
@@ -76,13 +76,13 @@
                         <tbody>
                             @foreach ($tasks as $task)
                                 <tr>
-                                    <td><b>{{ $task->title }}</b></td>
-                                    <td  style="width: 35% !important;">{{ $task->activities }}</td>
-                                    <td>{{ is_numeric($task->member) ? $users->where('id', $task->member)->first()->name : $task->member }}
+                                    <td data-title="Title"><b>{{ $task->title }}</b></td>
+                                    <td data-title="Details"  style="width: 35% !important;">{{ $task->activities }}</td>
+                                    <td data-title="Member Info">{{ is_numeric($task->member) ? $users->where('id', $task->member)->first()->name : $task->member }}
                                     </td>
-                                    <td>{{ $task->date }}</td>
-                                    <td>{{ $task->status }}</td>
-                                    <td>{{ is_numeric($task->assigned_to) ? $users->where('id', $task->assigned_to)->first()->name : $task->assigned_to }}
+                                    <td data-title="Date">{{ $task->date }}</td>
+                                    <td data-title="Status">{{ $task->status }}</td>
+                                    <td data-title="Assigned To">{{ is_numeric($task->assigned_to) ? $users->where('id', $task->assigned_to)->first()->name : $task->assigned_to }}
                                     </td>
 
                                     <td>

@@ -76,13 +76,13 @@
                         <tbody>
                             @foreach ($tasks as $task)
                                 <tr>
-                                    <td data-title="Title"><b>{{ $task->title }}</b></td>
-                                    <td data-title="Details"  style="width: 35% !important;">{{ $task->activities }}</td>
-                                    <td data-title="Member Info">{{ is_numeric($task->member) ? $users->where('id', $task->member)->first()->name : $task->member }}
+                                    <td data-title="Title: "><b>{{ $task->title }}</b></td>
+                                    <td data-title="Details: ">{{ $task->activities }}</td>
+                                    <td data-title="Member: ">{{ is_numeric($task->member) ? $users->where('id', $task->member)->first()->name : $task->member }}
                                     </td>
-                                    <td data-title="Date">{{ $task->date }}</td>
-                                    <td data-title="Status">{{ $task->status }}</td>
-                                    <td data-title="Assigned To">{{ is_numeric($task->assigned_to) ? $users->where('id', $task->assigned_to)->first()->name : $task->assigned_to }}
+                                    <td data-title="Date: ">{{ $task->date }}</td>
+                                    <td data-title="Status: ">{{ $task->status }}</td>
+                                    <td data-title="Assigned To: ">{{ is_numeric($task->assigned_to) ? $users->where('id', $task->assigned_to)->first()->name : $task->assigned_to }}
                                     </td>
 
                                     <td>

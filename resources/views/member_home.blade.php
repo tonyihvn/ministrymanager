@@ -32,7 +32,7 @@
                                     </tbody>
                                 </table>
                                 <div style="text-align: right">
-                                    {{ $tasks->links('pagination::bootstrap-4') }}
+                                    {{ $mytasks->links('pagination::bootstrap-4') }}
                                 </div>
                                 <div class="row">
                                     <a href="{{urel('tasks')}}">View All Tasks</a>

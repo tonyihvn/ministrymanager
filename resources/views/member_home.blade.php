@@ -51,17 +51,16 @@
                                     <thead>
                                         <tr style="color: ">
                                             <th>Activities</th>
-                                            <th>Action</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($settings->followups as $fup)
                                             <tr>
-                                                <td><b>{{ $fup->Member->name }}</b><br>
-                                                    <small>{{ $fup->date }}</small>
-                                                    {{ $fup->discussion }} <i><small> <hr>Next Action: {{ $fup->nextaction }}</small></i></td>
-                                                <td><a href="{{ url('member/'.$fup->member) }}" class="btn btn-sm btn-primary">View</a></td>
+                                                <td><b>{{ $fup->Member->name }}</b>
+                                                    <small>({{ $fup->date }})</small><br>
+                                                    {{ $fup->discussion }} <i><small> <hr>Next Action: {{ $fup->nextaction }}</small></i><br>
+                                                    <a href="{{ url('member/'.$fup->member) }}" class="btn btn-sm btn-primary">View</a>
+                                                </td>
                                             </tr>
                                         @endforeach
 

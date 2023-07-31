@@ -51,6 +51,11 @@
             margin-bottom:5px;
         }
         }
+
+        .panel{
+            overflow-x: scroll;
+
+        }
     </style>
 </head>
 

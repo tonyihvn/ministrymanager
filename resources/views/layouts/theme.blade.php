@@ -27,9 +27,6 @@
     <link rel="stylesheet"
         href="{{ asset('https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/select2.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-multiselect.css') }}">
-
-
 
     <style>
         .brand {
@@ -151,18 +148,6 @@
                 <nav>
                     <ul class="nav">
                         <li><a href="/home" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-
-                        <li class="roledlink Worker Admin Followup Pastor Finance Super visible-xs visible-sm">
-                            <form class="navbar-form navbar-left" action="{{ route('searchmembers') }}" method="post">
-                                @csrf
-                                <div class="input-group">
-                                    <input type="text" value="" name="keyword" class="form-control"
-                                        placeholder="Search Members...">
-                                    <span class="input-group-btn"><button type="submit"
-                                            class="btn btn-primary">Go</button></span>
-                                </div>
-                            </form>
-                        </li>
 
                         <li class="roledlink Worker Admin Followup Pastor Finance Super"
                             style="visibility:hidden !important;">

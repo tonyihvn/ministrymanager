@@ -16,14 +16,19 @@ class CreateFollowupsTable extends Migration
         Schema::create('followups', function (Blueprint $table) {
             $table->id();
             $table->string('title',50);
-            $table->string('member',70)->nullable();
             $table->date('date')->nullable();
             $table->string('type')->nullable();
             $table->text('discussion')->nullable();
             $table->string('nextaction')->nullable();
             $table->date('nextactiondate')->nullable();
             $table->string('status')->nullable();
-            $table->string('assigned_to',70)->nullable();
+
+            $table->unsignedBigInteger('member')->index();
+            $table->foreign('member')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger('assigned_to')->index();
+            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('cascade');
+
             $table->foreignId('settings_id')->constrained();
             $table->timestamps();
         });

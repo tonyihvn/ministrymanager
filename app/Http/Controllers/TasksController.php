@@ -240,7 +240,7 @@ class TasksController extends Controller
             $sessionid = \Cookie::get('sessionidd');
 
 
-            $body = $request->title;
+            $body = $request->title." ".$request->nextaction;
 
 
             $message = file_get_contents("http://www.smslive247.com/http/index.aspx?cmd=sendmsg&sessionid=".$sessionid."&message=".urlencode($body)."&sender=CHURCH&sendto=".$recipients."&msgtype=0");

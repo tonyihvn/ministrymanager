@@ -43,14 +43,48 @@
                     </div>
                 @endif
 
-    <div class="row">
+                @if (auth()->user()->role=="Followup" && $settings->followups->count() > 0)
+                    <h3>General Follow-up Activities</h3>
+                    <div class="row">
+                        <div class="panel">
 
+                            <div class="panel-body">
+                                <table class="table  responsive-table" id="products">
+                                    <thead>
+                                        <tr style="color: ">
+                                            <th>Member</th>
+                                            <th>Activities</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($settings->followups as $fup)
+                                            <tr>
+                                                <td><b>{{ $fup->Member->name }}</b><br>
+                                                    <small>{{ $fup->date }}</small></td>
+                                                <td>{{ $fup->discussion }} <i><small>Next Action: {{ $fup->nextaction }}</small></i></td>
+                                                <td><a href="{{ url('member/'.$fup->member) }}" class="btn btn-sm btn-primary">View</a></td>
+                                            </tr>
+                                        @endforeach
+
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                    </div>
+                @endif
+
+    <div class="row">
         <div class="panel-body">
             <div class="container">
                <h3>You are welcome to <b style="color: {{$settings->color}};">{{$settings->ministry_name}}</b></h3>
                <small>{{$settings->motto}}</small>
             </div>
-            <div class="panel-body">
+
 
                 @if($settings->mode=="InActive")
                     <b style="color: red">This church has not been activated on the MinistryHub, if you are the Admin of this church please contact MinistryHUb at: <br>account@ministryhub.com.ng</b>
@@ -75,7 +109,6 @@
                 @endforeach
 
 
-            </div>
         </div>
     </div>
 

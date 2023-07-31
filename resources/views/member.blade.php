@@ -215,18 +215,17 @@
 
                     <div class="form-group">
                         <label for="nextaction">Next Recommended Action</label>
-                        <input type="nextaction" name="nextaction" id="nextaction" class="form-control">
+                        <input type="text" name="nextaction" id="nextaction" class="form-control">
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="assigned_to"  class="control-label sr-only">Assigned To</label>
-                            <select class="form-control select2" name="assigned_to" id="assigned_to">
+                            <label for="assigned_to">Assigned To</label>
+                            <select class="form-control select2" name="assigned_to" id="assigned_to" style="width: 100%;">
                                 <option value="" selected>Assigned To</option>
                                 @foreach ($users as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
-
                             </select>
                         </div>
                         <div class="form-group col-md-6">

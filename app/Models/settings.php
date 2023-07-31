@@ -63,6 +63,6 @@ class settings extends Model
 
     public function followups()
     {
-        return $this->hasMany(followups::class, 'ministry_id', 'id');
+        return $this->hasMany(followups::class, 'settings_id', 'id');
     }
 }

@@ -35,7 +35,14 @@
                                     <td class="visible-md visible-lg">{{$member->id}}</td>
                                     <td>{{$member->name}}</td>
                                     <td>{{$member->status}}</td>
-                                    <td class="visible-md visible-lg">{{$member->ministry}}</td>
+                                    <td class="visible-md visible-lg">
+                                        @if(!empty($member->ministries))
+                                            @foreach ($member->ministries as $min)
+                                                {{$min->ministry->name}},<br>
+                                            @endforeach
+                                        @endif
+
+                                    </td>
                                     <td class="visible-md visible-lg">{{$member->phone_number}}</td>
 
                                     <td class="visible-md visible-lg">{{($member->assigned_to) == '' ? 'Not Assigned' : (is_numeric($member->assigned_to)?$users->where('id',$member->assigned_to)->first()->name:$member->assigned_to)}}</td>

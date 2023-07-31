@@ -33,7 +33,7 @@ class settings extends Model
 
     public function ministries()
     {
-        return $this->hasMany(ministries::class, 'ministry_id', 'id');
+        return $this->hasMany(ministries::class, 'settings_id', 'id');
     }
 
     public function accountheads()

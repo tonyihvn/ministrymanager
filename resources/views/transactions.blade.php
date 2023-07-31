@@ -93,7 +93,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="date">Transaction Date</label>
-                        <input type="date" name="date" id="date" class="form-control">
+                        <input type="text" name="date" id="date" class="form-control datepicker">
                     </div>
 
 

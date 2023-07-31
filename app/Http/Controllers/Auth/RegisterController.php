@@ -7,9 +7,11 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\audit;
 use App\Models\settings;
+use App\Models\ministrymembers;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 // use Illuminate\Http\Request;
 
@@ -78,7 +80,7 @@ class RegisterController extends Controller
 
         }
 
-        if(isset($data['ministry_name'])){
+        if(isset($data['ministry_name']) && $data['ministry_name']!=""){
 
             $settings_id = settings::create([
                 'ministry_name' => $data['ministry_name'],
@@ -100,7 +102,7 @@ class RegisterController extends Controller
             'settings_id'=>$settings_id
         ]);
 
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'gender' => $data['gender'],
@@ -113,5 +115,34 @@ class RegisterController extends Controller
             'status'=>"InActive",
             'settings_id'=>$settings_id
         ]);
+
+        $mainmin = "";
+
+        if(isset($data['ministry'])){
+            $last_key = end(array_keys($data['ministry']));
+
+            // $mainmin = $request->ministry[0];
+            foreach($data['ministry'] as $key=>$mins){
+                ministrymembers::updateOrCreate([
+                    'member_id'=>$user->id,
+                    'ministry_id'=>$mins
+                ],[
+                    'member_id'=>$user->id,
+                    'ministry_id'=>$mins
+                ]);
+
+                if ($key == $last_key) {
+                    $mainmin.=$mins;
+                }else{
+                    $mainmin.=$mins.",";
+                }
+            }
+        }
+
+        $user->ministry = $mainmin;
+        $user->save();
+
+
+        return $user;
     }
 }

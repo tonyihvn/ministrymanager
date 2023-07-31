@@ -16,13 +16,14 @@
                                     <div class="form-group col-lg-12">
                                         <select class="form-control" name="settings_id" id="settings_id">
 
-                                            <option value="1" selected>Select Church</option>
+                                            <option value="1">Select Church</option>
 
-                                            @foreach ($ministrygroups as $ministrygroup)
+                                            {{-- @foreach ($ministrygroups as $ministrygroup)
                                                     @foreach ($ministrygroup->settings as $usrmin)
                                                         <option value="{{$usrmin->id}}">{{$usrmin->ministry_name}}</option>
                                                     @endforeach
-                                            @endforeach
+                                            @endforeach --}}
+                                            <option value="2" selected>Abundant Life Assembly, CRM</option>
                                             <option value="None" style="color: darkOrange;">Not Listed? Add New Church</option>
 
                                         </select>
@@ -48,17 +49,17 @@
 
                                     <div class="form-group col-md-12">
                                         <label for="ministry_name">Church Name</label>
-                                        <input type="text" name="ministry_name" id="ministry_name" class="form-control" value="{{$settings->ministry_name}}">
+                                        <input type="text" name="ministry_name" id="ministry_name" class="form-control">
                                     </div>
 
                                     <div class="form-group col-md-12">
                                         <label for="motto">Motto</label>
-                                        <input type="text" name="motto" id="motto" class="form-control" value="{{$settings->motto}}">
+                                        <input type="text" name="motto" id="motto" class="form-control">
                                     </div>
 
                                     <div class="form-group  col-md-12">
                                         <label for="min_address">Address</label>
-                                        <input type="text" name="min_address" id="min_address" class="form-control" value="{{$settings->address}}">
+                                        <input type="text" name="min_address" id="min_address" class="form-control">
                                     </div>
 
                                     <input type="hidden" name="mode" value="InActive">
@@ -79,6 +80,22 @@
 
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label for="units" class="control-label sr-only">Units/Departments you belong to</label>
+                                        <small class="form-text text-muted"><i>You can select multiple options</i></small>
+
+                                        <select class="form-control select2" name="ministry[]" id="ministry" multiple="multiple">
+                                            <option value="" selected>None</option>
+                                                @foreach ($settings->ministries as $ms)
+                                                    <option value="{{$ms->id}}">{{$ms->name}}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+
+
+                                </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="dob" class="control-label sr-only">Date of Birth</label>
@@ -97,8 +114,8 @@
 
                                 <div class="row">
                                     <div class="form-group col-lg-12">
-                                        <label for="about"  class="control-label sr-only">About Member</label>
-                                        <textarea name="about" class="form-control" placeholder="About Member" rows="4"></textarea>
+                                        <label for="about"  class="control-label sr-only">About Me</label>
+                                        <textarea name="about" class="form-control" placeholder="About You" rows="4"></textarea>
                                     </div>
 
                                 </div>

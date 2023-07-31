@@ -104,12 +104,12 @@
 
                     <div class="form-group col-md-4">
                         <label for="from">Start Date</label>
-                        <input type="date" name="from" id="from" class="form-control">
+                        <input type="text" name="from" id="from" class="form-control datepicker">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="to">End Date</label>
-                        <input type="date" name="to" id="to" class="form-control">
+                        <input type="text" name="to" id="to" class="form-control datepicker">
                     </div>
 
                 </div>

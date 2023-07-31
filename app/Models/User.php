@@ -77,5 +77,10 @@ class User extends Authenticatable
         return $this->belongsTo(settings::class, 'settings_id', 'id');
     }
 
+    public function ministries()
+    {
+        return $this->hasMany(ministrymembers::class, 'member_id', 'id');
+    }
+
 
 }

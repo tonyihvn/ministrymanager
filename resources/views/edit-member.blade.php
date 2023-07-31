@@ -37,7 +37,7 @@
                                         <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label for="dob" class="control-label ">Date of Birth</label>
-                                                    <input id="dob" name="dob" type="date" class="form-control" value="{{ $user->dob }}" placeholder="Date of Birth">
+                                                    <input id="dob" name="dob" type="text" class="form-control" value="{{ $user->dob }}" placeholder="Date of Birth">
                                             </div>
 
                                             <div class="form-group col-md-6">
@@ -131,13 +131,18 @@
 
                                         <div class="form-group row">
                                             <label for="ministry"  class="control-label ">Ministry</label>
-                                            <select class="form-control select2" name="ministry" id="ministry">
-                                            <option value="{{ $user->ministry }}" selected>{{ $user->ministry }}</option>
-                                            @foreach ($ministries as $ministry)
-                                                <option value="{{$ministry->name}}">{{$ministry->name}}</option>
-                                            @endforeach
-
-
+                                            <select class="form-control select2" name="ministry[]" id="ministry" multiple>
+                                                @if ($user->ministry!="")
+                                                    @php
+                                                        $uministries = explode(",",$user->ministry);
+                                                    @endphp
+                                                    @foreach ($uministries as $um)
+                                                        <option value="{{ $um }}" selected>{{ $ministries->where('id',$um)->first()->name ?? '' }}</option>
+                                                    @endforeach
+                                                @endif
+                                                @foreach ($ministries as $ministry)
+                                                    <option value="{{$ministry->id}}">{{$ministry->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group row">

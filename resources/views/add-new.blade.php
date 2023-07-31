@@ -125,10 +125,10 @@
 
                                         <div class="form-group row">
                                             <label for="ministry"  class="control-label sr-only">Ministry</label>
-                                            <select class="form-control" name="ministry" id="ministry">
+                                            <select class="form-control select2" name="ministry[]" id="ministry" multiple>
                                             <option value="" disabled selected>Ministry</option>
                                             @foreach ($ministries as $ministry)
-                                                <option value="{{$ministry->name}}">{{$ministry->name}}</option>
+                                                <option value="{{$ministry->id}}">{{$ministry->name}}</option>
                                             @endforeach
 
 

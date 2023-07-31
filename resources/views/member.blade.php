@@ -46,7 +46,16 @@
                                 @endphp
                                 <li class="list-group-item">Invited By: <b>{{$invited_by}} (<a href="tel:{{$phone_number}}">{{$phone_number}}</a>)</b></li>
                                 <li class="list-group-item">Assigned To: <b>{{$assigned_to}} (<a href="tel:{{$phone_number2}}">{{$phone_number2}}</a>)</b></li>
-                                <li class="list-group-item">Ministry: <b>{{$member->ministry}}</b></li>
+                                <li class="list-group-item"><b>Departments/Units:</b> <br>
+                                    @if ($member->ministry!="")
+                                    @php
+                                        $uministries = explode(",",$member->ministry);
+                                    @endphp
+                                    @foreach ($uministries as $um)
+                                        <span value="{{ $um }}" selected>{{ $settings->ministries->where('id',$um)->first()->name ?? '' }}</span><br>
+                                    @endforeach
+                                @endif
+                                </li>
                             </ul>
                         </div>
 
@@ -120,7 +129,7 @@
 
                 <div class="form-group">
                     <label for="date">Date to Deliver</label>
-                    <input type="date" name="date" id="date" class="form-control">
+                    <input type="text" name="date" id="date" class="form-control datepicker">
                 </div>
 
                 <div class="form-group">
@@ -185,7 +194,7 @@
 
                     <div class="form-group">
                         <label for="date">Date Done</label>
-                        <input type="date" name="date" id="date" class="form-control">
+                        <input type="text" name="date" id="date" class="form-control datepicker">
                     </div>
 
                     <div class="form-group">
@@ -222,7 +231,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="nextactiondate">Next Action Date</label>
-                            <input type="date" name="nextactiondate" id="nextactiondate" class="form-control">
+                            <input type="text" name="nextactiondate" id="nextactiondate" class="form-control datepicker">
                         </div>
                     </div>
 

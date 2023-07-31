@@ -14,6 +14,7 @@ use App\Models\followups;
 use App\Models\programmes;
 use App\Models\settings;
 use App\Models\admintable;
+use App\Models\ministrymembers;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -139,7 +140,7 @@ class HomeController extends Controller
             $password = $request->oldpassword;
         }
 
-        $userid = User::updateOrCreate(['id'=>$request->id],[
+        $user = User::updateOrCreate(['id'=>$request->id],[
             'name' => $request->name,
             'email' => $email,
             'gender' => $request->gender,
@@ -153,19 +154,42 @@ class HomeController extends Controller
             'house_fellowship' => $request->house_fellowship,
             'invited_by' => $request->invited_by,
             'assigned_to' => $request->assigned_to,
-            'ministry' => $request->ministry,
+            // 'ministry' => $request->ministry,
             'role'=>$request->role,
             'status'=>$request->status,
             'settings_id'=>Auth()->user()->settings_id
 
-        ])->id;
+        ]);
+
+        $mainmin = "";
+        if(isset($request->ministry)){
+            // $mainmin = $request->ministry[0];
+            foreach($request->ministry as $key=>$mins){
+                ministrymembers::updateOrCreate([
+                    'member_id'=>$user->id,
+                    'ministry_id'=>$mins
+                ],[
+                    'member_id'=>$user->id,
+                    'ministry_id'=>$mins
+                ]);
+
+                $mainmin.=$mins.",";
+
+            }
+        }
+
+        $cleaned_mainmin = rtrim($mainmin, ",");
+
+        $user->ministry = $cleaned_mainmin;
+        $user->save();
+
 
 
         admintable::updateOrCreate([
-            'user_id'=>$userid,
+            'user_id'=>$user->id,
             'settings_id'=>Auth()->user()->settings_id,
         ],[
-            'user_id'=>$userid,
+            'user_id'=>$user->id,
             'settings_id'=>Auth()->user()->settings_id,
             'role'=>$request->role,
         ]);

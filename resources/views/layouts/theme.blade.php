@@ -27,6 +27,10 @@
     <link rel="stylesheet"
         href="{{ asset('https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-multiselect.css') }}">
+
+
+
     <style>
         .brand {
             padding: 10px 5px 5px 10px !important;
@@ -277,10 +281,19 @@
     <!-- Javascript -->
     <script src="{{ asset('/assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
     <script src="{{ asset('/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('/assets/scripts/klorofil-common.js') }}"></script>
     <script src="{{ asset('/assets/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('/assets/scripts/select2.js') }}"></script>
+
+    <script src="{{ asset('/assets/scripts/bootstrap-multiselect.js') }}"></script>
+    <script>
+        $(function(){
+            $('.multiselect').multiselect();
+        });
+    </script>
 
 
 
@@ -613,216 +626,6 @@
 <script>
     $('.select2').select2({
         theme: "classic"
-    });
-
-    function accountHead(accid) {
-
-
-
-        var title = $('#ach' + accid).attr("data-title");
-        var category = $('#ach' + accid).attr("data-category");
-        var type = $('#ach' + accid).attr("data-type");
-        var description = $('#ach' + accid).attr("data-description");
-
-        $('#id').val(accid);
-        $('#title').val(title);
-        $('#category').val(category).attr("selected", "selected");
-        $('#type').val(type);
-        $('#description').val(description);
-
-
-    }
-
-    function attendance(accid) {
-
-
-
-        var date = $('#ach' + accid).attr("data-date");
-        var activity = $('#ach' + accid).attr("data-activity");
-        var men = $('#ach' + accid).attr("data-men");
-        var women = $('#ach' + accid).attr("data-women");
-        var children = $('#ach' + accid).attr("data-children");
-        var remarks = $('#ach' + accid).attr("data-remarks");
-
-        $('#id').val(accid);
-        $('#date').val(date);
-        $('#activity').val(activity).attr("selected", "selected");
-        $('#men').val(men);
-        $('#women').val(women);
-        $('#children').val(children);
-        $('#remarks').val(remarks);
-
-    }
-
-    function transaction(accid) {
-
-
-        var title = $('#ach' + accid).attr("data-title");
-        var date = $('#ach' + accid).attr("data-date");
-        var account_head = $('#ach' + accid).attr("data-account_head");
-        var amount = $('#ach' + accid).attr("data-amount");
-        var reference_no = $('#ach' + accid).attr("data-reference_no");
-        var detail = $('#ach' + accid).attr("data-detail");
-        var from = $('#ach' + accid).attr("data-from");
-        var to = $('#ach' + accid).attr("data-to");
-        var approved_by = $('#ach' + accid).attr("data-approved_by");
-        var recorded_by = $('#ach' + accid).attr("data-recorded_by");
-
-        $('#title').val(title);
-        $('#id').val(accid);
-        $('#date').val(date);
-        $('#account_head').val(account_head).attr("selected", "selected");
-        $('#amount').val(amount);
-        $('#reference_no').val(reference_no);
-        $('#detail').val(detail);
-        $('#from').val(from).attr("selected", "selected");
-        $('#to').val(to).attr("selected", "selected");
-        $('#approved_by').val(approved_by).attr("selected", "selected");
-        $('#recorded_by').val(recorded_by).attr("selected", "selected");
-
-    }
-
-    function ministry(accid) {
-
-
-
-        var name = $('#ach' + accid).attr("data-name");
-        var details = $('#ach' + accid).attr("data-details");
-        var leader = $('#ach' + accid).attr("data-leader");
-        var activities = $('#ach' + accid).attr("data-activities");
-
-        $('#id').val(accid);
-        $('#name').val(name);
-        $('#details').val(details);
-        $('#leader').val(leader).attr("selected", "selected");
-        $('#activities').text(activities);
-
-    }
-
-    function hfellowship(accid) {
-
-
-
-        var name = $('#ach' + accid).attr("data-name");
-        var about = $('#ach' + accid).attr("data-about");
-        var location = $('#ach' + accid).attr("data-location");
-        var about = $('#ach' + accid).attr("data-about");
-
-        var leader = $('#ach' + accid).attr("data-leader");
-        var activities = $('#ach' + accid).attr("data-activities");
-
-        $('#id').val(accid);
-        $('#name').val(name);
-        $('#location').val(location);
-        $('#address').val(address);
-        $('#about').val(about);
-        $('#leader').val(leader).attr("selected", "selected");
-        $('#activities').text(activities);
-
-    }
-
-    function programme(accid) {
-
-        var title = $('#ach' + accid).attr("data-title");
-        var type = $('#ach' + accid).attr("data-type");
-        var from = $('#ach' + accid).attr("data-from");
-        var to = $('#ach' + accid).attr("data-to");
-        var picture = $('#ach' + accid).attr("data-pic");
-
-        var details = $('#ach' + accid).attr("data-details");
-        var category = $('#ach' + accid).attr("data-category");
-        var ministry = $('#ach' + accid).attr("data-ministry");
-
-        $('#id').val(accid);
-        $('#title').val(title);
-        $('#type').val(type).attr("selected", "selected");
-        $('#from').val(from);
-        $('#to').val(to);
-
-
-
-        $('#details').val(details);
-        $('#oldpicture').val(picture);
-        $('#category').val(category).attr("selected", "selected");
-        $('#ministry').val(ministry).attr("selected", "selected");
-
-        // var editor2 = new FroalaEditor('.richtext', {}, function () {
-        // Call the method inside the initialized event.
-        editor.html.set(details);
-        // });
-    }
-
-    function addnumber(number) {
-        var receivers = $('#recipients').val();
-
-        if (number == "all") {
-
-            if (receivers == "") {
-                $('#recipients').val($('#all').attr('data-allnumbers'));
-            } else {
-                $('#recipients').val('');
-            }
-
-
-        } else {
-            if ($("#recipients").val().indexOf(',' + number) >= 0) {
-
-
-
-                $('#recipients').val(receivers.replace(',' + number, ''));
-
-            } else if ($("#recipients").val().indexOf(number + ',') >= 0) {
-
-
-                $('#recipients').val(receivers.replace(number + ',', ''));
-
-            } else if ($("#recipients").val().indexOf(number) >= 0) {
-
-
-                $('#recipients').val(receivers.replace(number, ''));
-
-            } else {
-                if (receivers == "") {
-
-                    $('#recipients').val(number);
-                } else {
-                    $('#recipients').val(receivers + ',' + number);
-                }
-
-            }
-        }
-
-    }
-
-    // CHECK ALL
-    $('#all').click(function(event) {
-        if (this.checked) {
-            // Iterate each checkbox
-            $(':checkbox').each(function() {
-                this.checked = true;
-            });
-        } else {
-            $(':checkbox').each(function() {
-                this.checked = false;
-            });
-        }
-    });
-
-    // TEXT AREA Counter
-    $('#body').on("input", function() {
-        var maxlength = $(this).attr("maxlength");
-        var currentLength = $(this).val().length;
-
-        $("#charcounter").text(currentLength + " characters");
-        $("#pagecounter").text(Math.ceil(currentLength / 160) + " pages");
-
-
-        if (currentLength >= maxlength) {
-            $("#error").text("You have reached the maximum number of characters.");
-        } else {
-            $("#charleft").text(maxlength - currentLength + " chars left");
-
-        }
     });
 
     var usrRole = "{{ $login_user->role }}";

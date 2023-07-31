@@ -28,7 +28,7 @@
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
-        padding-left: 20%;
+        padding-left: 22%;
         white-space: normal;
         text-align:left;
         }
@@ -40,7 +40,7 @@
         top: 6px;
         left: 6px;
         width: 75%;
-        padding-right: 10px;
+        padding-right: 1px;
         white-space: nowrap;
         text-align:left;
         font-weight: bold;
@@ -60,7 +60,7 @@
 
             <div class="panel-body">
                 <div id="no-more-tables">
-                    <table class="table  responsive-table" id="products">
+                    <table class="table  responsive-table" id="products" style="font-size: 0.9em">
                         <thead>
                             <tr style="color: ">
                                 <th>Title</th>

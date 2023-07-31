@@ -13,8 +13,7 @@
                                 <table class="table  responsive-table" id="products">
                                     <thead>
                                         <tr style="color: ">
-                                            <th>Title</th>
-                                            <th>Date</th>
+                                            <th style="width: 80%">Title</th>
                                             <th>Status</th>
 
                                         </tr>
@@ -22,8 +21,9 @@
                                     <tbody>
                                         @foreach ($mytasks as $task)
                                             <tr>
-                                                <td><b>{{ $task->title }}</b></td>
-                                                <td>{{ $task->date }}</td>
+
+                                                <td><b>{{ $task->title }}</b><br>
+                                                    {{ $task->date }}</td>
                                                 <td>{{ $task->status }}</td>
                                             </tr>
                                         @endforeach
@@ -33,7 +33,7 @@
                                 </table>
 
                                 <div class="row">
-                                    <a href="{{url('tasks')}}">View All Tasks</a>
+                                    <a href="{{url('tasks')}}" class="btn btn-sm btn-primary float-lg-right">View All Tasks</a>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,6 @@
                                 <table class="table  responsive-table" id="products">
                                     <thead>
                                         <tr style="color: ">
-                                            <th>Member</th>
                                             <th>Activities</th>
                                             <th>Action</th>
 
@@ -60,8 +59,8 @@
                                         @foreach ($settings->followups as $fup)
                                             <tr>
                                                 <td><b>{{ $fup->Member->name }}</b><br>
-                                                    <small>{{ $fup->date }}</small></td>
-                                                <td>{{ $fup->discussion }} <i><small>Next Action: {{ $fup->nextaction }}</small></i></td>
+                                                    <small>{{ $fup->date }}</small>
+                                                    {{ $fup->discussion }} <i><small> <hr>Next Action: {{ $fup->nextaction }}</small></i></td>
                                                 <td><a href="{{ url('member/'.$fup->member) }}" class="btn btn-sm btn-primary">View</a></td>
                                             </tr>
                                         @endforeach

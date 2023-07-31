@@ -33,7 +33,7 @@
                                 </table>
 
                                 <div class="row">
-                                    <a href="{{urel('tasks')}}">View All Tasks</a>
+                                    <a href="{{url('tasks')}}">View All Tasks</a>
                                 </div>
                             </div>
                         </div>

@@ -72,7 +72,7 @@
 			<div class="vertical-align-middle">
 
 				<div class="logocontainer">
-					<img  src="assets/img/cover_login.jpg" alt="{{$settings->motto}}" class="logo  img-circle">
+					<img  src="{{asset('/assets/img/cover_login.jpg')}}" alt="{{$settings->motto}}" class="logo  img-circle">
 				</div>
 
 				<div class="auth-box ">
@@ -87,8 +87,8 @@
                             <div class="overlay"></div>
                             <div class="content text">
 
-                                <h1 style="margin-top: 100px;">The Ministry Manager</h1>
-                                <p>A comprehensive system to manage every activity in a church/ministry.</p>
+                                <h1 style="margin-top: 100px;">{{$settings->ministry_name}}</h1>
+                                <p>{{$settings->motto}}</p>
                             </div>
                         </div>
                         <div class="clearfix"></div>

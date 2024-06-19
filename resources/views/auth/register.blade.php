@@ -23,7 +23,7 @@
                                                         <option value="{{$usrmin->id}}">{{$usrmin->ministry_name}}</option>
                                                     @endforeach
                                             @endforeach --}}
-                                            <option value="2" selected>Abundant Life Assembly, CRM</option>
+                                            <option value="1" selected>Abundant Life Assembly, CRM</option>
                                             <option value="None" style="color: darkOrange;">Not Listed? Add New Church</option>
 
                                         </select>

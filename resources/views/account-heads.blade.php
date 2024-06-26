@@ -9,8 +9,7 @@
                 <div class="panel-heading">
 
                         <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#accounthead">Add New</a>
-
-
+                        {{-- Just a comment --}}
                 </div>
                 <div class="panel-body">
                     <table class="table  responsive-table">

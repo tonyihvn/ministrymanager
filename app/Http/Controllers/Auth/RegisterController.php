@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Auth;
 
 // use Illuminate\Http\Request;
 
@@ -98,7 +99,7 @@ class RegisterController extends Controller
         audit::create([
             'action'=>"New User Registration ".$data['email'],
             'description'=>'A new user was registered',
-            'doneby'=>"Auto", // Auth::user()->id
+            'doneby'=>Auth::user()->id ?? 1,
             'settings_id'=>$settings_id
         ]);
 
@@ -118,7 +119,7 @@ class RegisterController extends Controller
 
         $mainmin = "";
 
-        if(isset($data['ministry'])){
+        if(isset($data['ministry'])  && ($data['ministry']!="")){
             $last_key = end(array_keys($data['ministry']));
 
             // $mainmin = $request->ministry[0];

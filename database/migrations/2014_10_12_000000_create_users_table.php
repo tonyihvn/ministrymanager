@@ -41,7 +41,9 @@ class CreateUsersTable extends Migration
         DB::table('users')->insert(
             array(
                 'name' => 'Ministry Manager',
-                'role' => 'Super'
+                'role' => 'Super',
+                'email' => 'admin@ministrymanager.com',
+                'password' => 'b324b580a1deb21f3b5234026165b04d'
             ));
 
     }

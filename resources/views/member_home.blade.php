@@ -3,7 +3,6 @@
 @section('content')
     @php $pagename="member_home"; @endphp
 
-
                 @if ($mytasks->count() > 0)
                     <h3>My Assigned Tasks</h3>
                     <div class="row">

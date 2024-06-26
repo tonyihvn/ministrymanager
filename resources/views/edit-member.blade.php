@@ -1,7 +1,6 @@
 @extends('layouts.theme')
 @php $users = $hmembers @endphp
 @section('content')
-
                     <div class="card">
                         <div class="card-header">
                             Add New Member
@@ -257,6 +256,4 @@
                             Info:
                         </div>
                     </div>
-
-
 @endsection

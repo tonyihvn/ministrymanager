@@ -89,8 +89,13 @@
                     </form>
 
                     <div class="navbar-btn navbar-btn-right">
-                        <a class="btn btn-success update-pro" href="/add-new" title="New Member" target="_blank"><span
+                        <a class="btn btn-success update-pro btn-xs" href="/add-new" title="New Member"><span
                                 class="fa fa-user-plus"></span> <span>New Member</span></a>
+                    </div>
+
+                    <div class="navbar-btn navbar-btn-right">
+                        <a class="btn btn-primary btn-xs" href="/add-report" title="New Report"><span
+                                class="fa fa-list-plus"></span> <span>New Report</span></a>
                     </div>
                 @endif
 
@@ -169,6 +174,20 @@
                                     <li><a href="/members" class="">View Members</a></li>
                                     <li><a href="/add-new" class="roledlink Worker,Admin,Followup,Pastor,Super">Add
                                             New</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="roledlink Worker Admin Followup Pastor Finance Super" style="visibility:hidden;">
+                            <a href="#subPages2" data-toggle="collapse" class="collapsed"><i
+                                    class="lnr lnr-list"></i> <span>Reports</span> <i
+                                    class="icon-submenu lnr lnr-chevron-left"></i></a>
+                            <div id="subPages2" class="collapse ">
+                                <ul class="nav">
+                                    <li><a href="/reports" class="">View Reports</a></li>
+                                    <li><a href="/add-report" class="roledlink Worker,Admin,Followup,Pastor,Super">Add
+                                            New Report</a></li>
 
                                 </ul>
                             </div>

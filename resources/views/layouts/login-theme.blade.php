@@ -72,7 +72,7 @@
 			<div class="vertical-align-middle">
 
 				<div class="logocontainer">
-					<img  src="{{asset('/assets/img/cover_login.jpg')}}" alt="{{$settings->motto}}" class="logo  img-circle">
+					<img  src="{{asset('/assets/img/logo.jpg')}}" alt="{{$settings->motto}}" class="logo  img-circle">
 				</div>
 
 				<div class="auth-box ">

@@ -39,7 +39,7 @@ Route::post('/searchmembers', [App\Http\Controllers\HomeController::class, 'memb
 // TASKS / TO DOs
 Route::post('/newtask', [App\Http\Controllers\TasksController::class, 'store'])->name('newtask')->middleware('role:Worker,Admin,Followup,Pastor,Super');
 Route::post('/newfollowup', [App\Http\Controllers\TasksController::class, 'newfollowup'])->name('newfollowup')->middleware('role:Worker,Admin,Followup,Pastor,Super');
-Route::get('/tasks', [App\Http\Controllers\TasksController::class, 'index'])->name('tasks')->middleware('role:Worker,Admin,Followup,ember,Pastor,Super');
+Route::get('/tasks', [App\Http\Controllers\TasksController::class, 'index'])->name('tasks')->middleware('role:Worker,Admin,Followup,Member,Pastor,Super');
 Route::get('/completetask/{id}', [App\Http\Controllers\TasksController::class, 'completetask'])->name('completetask')->middleware('role:Worker,Admin,Followup,Pastor,Super');
 Route::get('/inprogresstask/{id}', [App\Http\Controllers\TasksController::class, 'inprogresstask'])->name('inprogresstask')->middleware('role:Worker,Admin,Followup,Pastor,Super');
 Route::get('/delete-task/{id}', [App\Http\Controllers\TasksController::class, 'destroy'])->name('destroy')->middleware('role:Super');
@@ -89,6 +89,14 @@ Route::get('/sentmessages', [App\Http\Controllers\HomeController::class, 'sentSM
 Route::get('/audits', [App\Http\Controllers\HomeController::class, 'audits'])->name('audits')->middleware('role:Admin,Super,Pastor');
 Route::get('/delete-audit/{id}', [App\Http\Controllers\HomeController::class, 'delAudit'])->name('delete-audit')->middleware('role:Admin,Super,Pastor');
 
+// REPORTS
+Route::get('/reports', [App\Http\Controllers\ReportsController::class, 'index'])->name('reports')->middleware('role:Admin,Super,Pastor');
+Route::get('/add-report', [App\Http\Controllers\ReportsController::class, 'create'])->name('add-report')->middleware('role:Admin,Super,Pastor');
+Route::post('/addreport', [App\Http\Controllers\ReportsController::class, 'store'])->name('addreport')->middleware('role:Admin,Super,Pastor,Member');
+Route::get('/delete-report/{id}', [App\Http\Controllers\ReportsController::class, 'destroy'])->name('delete-report')->middleware('role:Admin,Super,Pastor');
+Route::get('/view-report/{id}', [App\Http\Controllers\ReportsController::class, 'show'])->name('view-report')->middleware('role:Admin,Super,Pastor');
+Route::get('/edit-report/{id}', [App\Http\Controllers\ReportsController::class, 'edit'])->name('edit-report')->middleware('role:Admin,Super,Pastor');
+Route::post('/updatereport', [App\Http\Controllers\ReportsController::class, 'update'])->name('updatereport')->middleware('role:Admin,Super,Pastor');
 
 // ARTISAN COMMANDS
 Route::get('/artisan1/{command}', [App\Http\Controllers\ProgrammesController::class, 'Artisan1']);

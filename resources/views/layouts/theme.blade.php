@@ -180,10 +180,10 @@
                         </li>
 
                         <li class="roledlink Worker Admin Followup Pastor Finance Super" style="visibility:hidden;">
-                            <a href="#subPages2" data-toggle="collapse" class="collapsed"><i
+                            <a href="#subPages02" data-toggle="collapse" class="collapsed"><i
                                     class="lnr lnr-list"></i> <span>Reports</span> <i
                                     class="icon-submenu lnr lnr-chevron-left"></i></a>
-                            <div id="subPages2" class="collapse ">
+                            <div id="subPages02" class="collapse ">
                                 <ul class="nav">
                                     <li><a href="/reports" class="">View Reports</a></li>
                                     <li><a href="/add-report" class="roledlink Worker,Admin,Followup,Pastor,Super">Add

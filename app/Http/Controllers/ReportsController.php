@@ -52,9 +52,12 @@ class ReportsController extends Controller
      * @param  \App\Models\reports  $reports
      * @return \Illuminate\Http\Response
      */
-    public function show(reports $reports)
+    public function show($rid)
     {
+        $report = reports::find($rid);
+        $ministries = ministries::select('id', 'name')->get();
 
+        return view('view-report', compact('report', 'ministries'));
     }
 
     /**
@@ -63,11 +66,12 @@ class ReportsController extends Controller
      * @param  \App\Models\reports  $reports
      * @return \Illuminate\Http\Response
      */
-    public function edit(reports $reports)
+    public function edit($rid)
     {
+        $report = reports::find($rid);
         $ministries = ministries::select('id', 'name')->get();
 
-        return view('edit-report', compact('reports', 'ministries'));
+        return view('edit-report', compact('report', 'ministries'));
     }
 
     /**
@@ -84,6 +88,19 @@ class ReportsController extends Controller
         return redirect()->route('reports');
     }
 
+    // create function for addremark make it to add more text under every exiting remarks
+    public function addremark(Request $request)
+    {
+        $report = reports::find($request->report_id);
+        if($report->remarks == null) {
+            $report->remarks = $request->remarks. "<br><i> Written By: ".Auth()->user()->name. " on ".date('Y-m-d H:i:s')."</i><hr>";
+        }else {
+            $report->remarks = $report->remarks . "\n" . $request->remarks. "<br><i> Written By: ".Auth()->user()->name. " on ".date('Y-m-d H:i:s')."</i><hr>";
+        }
+        $report->save();
+
+        return redirect()->route('view-report', $request->report_id);
+    }
     /**
      * Remove the specified resource from storage.
      *

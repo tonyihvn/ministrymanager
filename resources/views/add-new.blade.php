@@ -39,6 +39,11 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="date_recieved" class="control-label sr-only">Date Received</label>
+                                                    <input id="date_recieved" name="date_recieved" type="text" class="form-control datepicker" placeholder="Date Received">
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="gender"  class="control-label sr-only">Gender</label>
                                                 <select class="form-control" name="gender" id="gender">
                                                     <option value="" selected>Gender</option>
@@ -62,14 +67,10 @@
 
                                         </div>
 
-
                                         <div class="form-group row">
                                             <label for="about"  class="control-label sr-only">About Member</label>
                                             <textarea name="about" id="about" class="form-control" placeholder="About Member" rows="4"></textarea>
                                         </div>
-
-
-
 
                                     </div>
                                     <div class="col-md-3  col-md-offset-1">
@@ -149,11 +150,11 @@
                                         <div class="form-group row">
                                             <label for="status"  class="control-label sr-only">Status</label>
                                             <select class="form-control" name="status" id="status">
-                                                <option value="Set Status" selected>Current Status</option>
+                                                <option value="Set Status">Current Status</option>
                                                 <option value="Member">Member</option>
                                                 <option value="Pastor">Pastor</option>
                                                 <option value="S.O">S.O</option>
-                                                <option value="New Member">New Member</option>
+                                                <option value="New Member" selected>New Member</option>
                                                 <option value="Evangelised">Evangelised</option>
                                                 <option value="Outreached">Outreached</option>
                                                 <option value="Minister">Minister</option>

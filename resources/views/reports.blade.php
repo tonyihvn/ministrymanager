@@ -8,7 +8,7 @@
             <div class="panel">
                 <div class="panel-heading">
 
-                        <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#hfellowship">Add New</a>
+                        <a href="{{url('add-report')}}" class="btn btn-primary pull-right">Add New</a>
 
 
                 </div>

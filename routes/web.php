@@ -97,7 +97,8 @@ Route::get('/delete-report/{id}', [App\Http\Controllers\ReportsController::class
 Route::get('/view-report/{id}', [App\Http\Controllers\ReportsController::class, 'show'])->name('view-report')->middleware('role:Admin,Super,Pastor');
 Route::get('/edit-report/{id}', [App\Http\Controllers\ReportsController::class, 'edit'])->name('edit-report')->middleware('role:Admin,Super,Pastor');
 Route::post('/updatereport', [App\Http\Controllers\ReportsController::class, 'update'])->name('updatereport')->middleware('role:Admin,Super,Pastor');
-
+// create route for addremark
+Route::post('/addremark', [App\Http\Controllers\ReportsController::class, 'addremark'])->name('addremark')->middleware('role:Admin,Super,Pastor');
 // ARTISAN COMMANDS
 Route::get('/artisan1/{command}', [App\Http\Controllers\ProgrammesController::class, 'Artisan1']);
 Route::get('/artisan2/{command}/{param}', [App\Http\Controllers\ProgrammesController::class, 'Artisan2']);

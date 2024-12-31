@@ -148,7 +148,7 @@ class HomeController extends Controller
             'age_group'=>$request->age_group,
             'phone_number'=>$request->phone_number,
             'password' => $password,
-            'about' => $request->about,
+            'about' => $request->date_recieved."<br>".$request->about,
             'address' => $request->address,
             'location' => $request->location,
             'house_fellowship' => $request->house_fellowship,

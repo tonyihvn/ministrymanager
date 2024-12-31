@@ -172,7 +172,7 @@
                             <div id="subPages2" class="collapse ">
                                 <ul class="nav">
                                     <li><a href="/members" class="">View Members</a></li>
-                                    <li><a href="/add-new" class="roledlink Worker,Admin,Followup,Pastor,Super">Add
+                                    <li><a href="/add-new" class="roledlink Worker Admin Followup Pastor Super">Add
                                             New</a></li>
 
                                 </ul>
@@ -186,7 +186,7 @@
                             <div id="subPages02" class="collapse ">
                                 <ul class="nav">
                                     <li><a href="/reports" class="">View Reports</a></li>
-                                    <li><a href="/add-report" class="roledlink Worker,Admin,Followup,Pastor,Super">Add
+                                    <li><a href="/add-report" class="roledlink Worker Admin Followup Pastor Super">Add
                                             New Report</a></li>
 
                                 </ul>

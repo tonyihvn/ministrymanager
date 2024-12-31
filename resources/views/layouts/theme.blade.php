@@ -67,7 +67,7 @@
                 </div>
                 <div class="brand">
                     <div class="col-sm-3">
-                        <a href="/home"> <img src="/images/{{ $settings->logo }}" class="img-responsive logo"
+                        <a href="/home"> <img src="/public/images/{{ $settings->logo }}" class="img-responsive logo"
                                 style="height: auto !important; position: relative; padding: 0px;"></a>
                     </div>
                     <div class="col-lg-9">

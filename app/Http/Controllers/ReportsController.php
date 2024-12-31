@@ -81,9 +81,10 @@ class ReportsController extends Controller
      * @param  \App\Models\reports  $reports
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatereportsRequest $request, reports $reports)
+    public function update(Request $request)
     {
-        $reports->update($request->validated());
+        $report = reports::find($request->id);
+        $report->update($request->all());
 
         return redirect()->route('reports');
     }
@@ -107,9 +108,9 @@ class ReportsController extends Controller
      * @param  \App\Models\reports  $reports
      * @return \Illuminate\Http\Response
      */
-    public function destroy(reports $reports)
+    public function destroy($rid)
     {
-        $reports->delete();
+        reports::find($rid)->delete();
 
         return redirect()->route('reports');
     }

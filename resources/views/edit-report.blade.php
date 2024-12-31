@@ -9,6 +9,8 @@
                         <div class="panel-body">
                             <form action="{{route('updatereport')}}" method="post">
                                 @csrf
+                                <input type="hidden" name="id" value="{{$report->id}}">
+
                                 <div class="form-group">
                                     <label for="title">Report Title</label>
                                     <input type="text" name="title" class="form-control" value="{{$report->title}}">
@@ -21,7 +23,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-4">
                                         <label for="ministry">Ministry / Unit</label>
-                                        <select name="ministry" class="form-control">
+                                        <select name="ministry_id" class="form-control">
                                             <option value="{{$report->ministry->id}}">{{$report->ministry->name}}</option>
                                             @foreach($ministries as $ministry)
                                                 <option value="{{$ministry->id}}">{{$ministry->name}}</option>
@@ -47,7 +49,7 @@
 
                                 <div class="form-group">
                                     <label for="remarks">remarks</label>
-                                    <textarea type="text" name="remarks richtext" class="form-control" rows="4">{!!$report->remarks!!}</textarea>
+                                    <textarea type="text" name="remarks" class="form-control richtext" rows="4">{!!$report->remarks!!}</textarea>
                                 </div>
 
 

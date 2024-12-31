@@ -623,9 +623,9 @@
     </script>
 @endif
 @if (isset($pagename) && $pagename == 'programmes')
-    <link href="{{ asset('node_modules/froala-editor/css/froala_editor.pkgd.min.css') }}" rel="stylesheet"
+    <link href="{{ asset('public/node_modules/froala-editor/css/froala_editor.pkgd.min.css') }}" rel="stylesheet"
         type="text/css" />
-    <script type="text/javascript" src="{{ asset('node_modules/froala-editor/js/froala_editor.pkgd.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/node_modules/froala-editor/js/froala_editor.pkgd.min.js') }}"></script>
     <script>
         var editor = new FroalaEditor('.richtext');
     </script>

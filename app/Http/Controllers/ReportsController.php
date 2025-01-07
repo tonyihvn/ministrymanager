@@ -43,7 +43,7 @@ class ReportsController extends Controller
     {
         reports::create($request->all());
 
-        return redirect()->route('reports');
+        return redirect()->route('reports')->with(['message'=>'The report has been saved successfully!']);
     }
 
     /**
@@ -86,7 +86,7 @@ class ReportsController extends Controller
         $report = reports::find($request->id);
         $report->update($request->all());
 
-        return redirect()->route('reports');
+        return redirect()->route('reports')->with(['message'=>'The report has been updated and saved successfully!']);
     }
 
     // create function for addremark make it to add more text under every exiting remarks
@@ -100,7 +100,7 @@ class ReportsController extends Controller
         }
         $report->save();
 
-        return redirect()->route('view-report', $request->report_id);
+        return redirect()->route('view-report', $request->report_id)->with(['message'=>'Your notes has been added and saved successfully!']);
     }
     /**
      * Remove the specified resource from storage.
@@ -112,6 +112,6 @@ class ReportsController extends Controller
     {
         reports::find($rid)->delete();
 
-        return redirect()->route('reports');
+        return redirect()->route('reports')->with(['message'=>'Selected report has been deleted successfully!']);;
     }
 }

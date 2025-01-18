@@ -90,13 +90,13 @@ Route::get('/audits', [App\Http\Controllers\HomeController::class, 'audits'])->n
 Route::get('/delete-audit/{id}', [App\Http\Controllers\HomeController::class, 'delAudit'])->name('delete-audit')->middleware('role:Admin,Super,Pastor');
 
 // REPORTS
-Route::get('/reports', [App\Http\Controllers\ReportsController::class, 'index'])->name('reports')->middleware('role:Admin,Super,Pastor');
-Route::get('/add-report', [App\Http\Controllers\ReportsController::class, 'create'])->name('add-report')->middleware('role:Admin,Super,Pastor');
-Route::post('/addreport', [App\Http\Controllers\ReportsController::class, 'store'])->name('addreport')->middleware('role:Admin,Super,Pastor,Member');
+Route::get('/reports', [App\Http\Controllers\ReportsController::class, 'index'])->name('reports')->middleware('role:Admin,Super,Pastor,Worker');
+Route::get('/add-report', [App\Http\Controllers\ReportsController::class, 'create'])->name('add-report')->middleware('role:Admin,Super,Pastor,Worker');
+Route::post('/addreport', [App\Http\Controllers\ReportsController::class, 'store'])->name('addreport')->middleware('role:Admin,Super,Pastor,Member,Worker');
 Route::get('/delete-report/{id}', [App\Http\Controllers\ReportsController::class, 'destroy'])->name('delete-report')->middleware('role:Admin,Super,Pastor');
-Route::get('/view-report/{id}', [App\Http\Controllers\ReportsController::class, 'show'])->name('view-report')->middleware('role:Admin,Super,Pastor');
-Route::get('/edit-report/{id}', [App\Http\Controllers\ReportsController::class, 'edit'])->name('edit-report')->middleware('role:Admin,Super,Pastor');
-Route::post('/updatereport', [App\Http\Controllers\ReportsController::class, 'update'])->name('updatereport')->middleware('role:Admin,Super,Pastor');
+Route::get('/view-report/{id}', [App\Http\Controllers\ReportsController::class, 'show'])->name('view-report')->middleware('role:Admin,Super,Pastor,Worker');
+Route::get('/edit-report/{id}', [App\Http\Controllers\ReportsController::class, 'edit'])->name('edit-report')->middleware('role:Admin,Super,Pastor,Worker');
+Route::post('/updatereport', [App\Http\Controllers\ReportsController::class, 'update'])->name('updatereport')->middleware('role:Admin,Super,Pastor,Worker');
 // create route for addremark
 Route::post('/addremark', [App\Http\Controllers\ReportsController::class, 'addremark'])->name('addremark')->middleware('role:Admin,Super,Pastor');
 // ARTISAN COMMANDS

@@ -214,10 +214,12 @@
                                             <select class="form-control" name="role" id="role">
                                                 <option value="{{$user->role}}" selected>{{$user->role}}</option>
                                                 <option value="Member">Member</option>
+                                                <option value="Worker">Worker</option>
                                                 <option value="Admin">Admin</option>
                                                 <option value="Usher">Usher</option>
                                                 <option value="Followup">Followup</option>
                                                 <option value="Finance">Finance</option>
+
                                                 @if ($settings->mode=="Maintenance")
                                                 <option value="Super">Super</option>
                                                 @endif

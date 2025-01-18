@@ -77,7 +77,7 @@
                     </div>
                 </div>
 
-                @if (Auth()->user()->role == 'Admin' || Auth()->user()->role == 'Super'  || Auth()->user()->role == 'Followup')
+                @if (Auth()->user()->role == 'Admin' || Auth()->user()->role == 'Super'  || Auth()->user()->role == 'Followup' || Auth()->user()->role == 'Worker')
                     <form class="navbar-form navbar-left" action="{{ route('searchmembers') }}" method="post">
                         @csrf
                         <div class="input-group">

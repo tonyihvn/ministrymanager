@@ -119,29 +119,36 @@ class RegisterController extends Controller
 
         $mainmin = "";
 
-        if(isset($data['ministry'])  && ($data['ministry']!="")){
-            $last_key = end(array_keys($data['ministry']));
+        if(isset($data['ministry'])){
+
+            $keys = array_keys($data['ministry']);
+            $last_key = end($keys);
 
             // $mainmin = $request->ministry[0];
             foreach($data['ministry'] as $key=>$mins){
-                ministrymembers::updateOrCreate([
-                    'member_id'=>$user->id,
-                    'ministry_id'=>$mins
-                ],[
-                    'member_id'=>$user->id,
-                    'ministry_id'=>$mins
-                ]);
 
-                if ($key == $last_key) {
-                    $mainmin.=$mins;
-                }else{
-                    $mainmin.=$mins.",";
+                if($mins!=""){
+                    ministrymembers::updateOrCreate([
+                        'member_id'=>$user->id,
+                        'ministry_id'=>$mins
+                    ],[
+                        'member_id'=>$user->id,
+                        'ministry_id'=>$mins
+                    ]);
+
+                    if ($key == $last_key) {
+                        $mainmin.=$mins;
+                    }else{
+                        $mainmin.=$mins.",";
+                    }
                 }
             }
         }
 
         $user->ministry = $mainmin;
         $user->save();
+
+        session()->flash('success', 'Registration successful! Welcome to the platform.');
 
 
         return $user;

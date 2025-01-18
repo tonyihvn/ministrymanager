@@ -54,7 +54,7 @@
 
 
                             <div class="bottom">
-                                <span class="helper-text"><i class="fa fa-lock"></i> <a href="{{ route('password.request') }}">Forgot password?</a> OR <a href="{{ route('register') }}">Signup</a></span>
+                                <span class="helper-text"><i class="fa fa-lock"></i> <a href="{{ route('password.request') }}">Forgot password?</a> or<br><a class="btn btn-success btn-xs" href="{{ route('register') }}">Signup</a></span>
                             </div>
 
                         @endif

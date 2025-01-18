@@ -23,7 +23,7 @@
                                                         <option value="{{$usrmin->id}}">{{$usrmin->ministry_name}}</option>
                                                     @endforeach
                                             @endforeach --}}
-                                            <option value="1" selected>Abundant Life Assembly, CRM</option>
+                                            <option value="2" selected>Abundant Life Assembly, CRM</option>
                                             <option value="None" style="color: darkOrange;">Not Listed? Add New Church</option>
 
                                         </select>
@@ -84,8 +84,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label for="units" class="control-label sr-only">Units/Departments you belong to</label>
-                                        <small class="form-text text-muted"><i>You can select multiple options</i></small>
-
+                                        <small class="form-text text-muted"><i>Unit/Departments you belong: You can select multiple options</i></small>
                                         <select class="form-control select2" name="ministry[]" id="ministry" multiple="multiple">
                                             <option value="" selected>None</option>
                                                 @foreach ($settings->ministries as $ms)

@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
 
                 $view->with('settings', settings::where('id',Auth::user()->settings_id)->first());
             }else{
-                $view->with('settings', settings::first());
+                $view->with('settings', settings::where('id',2)->first());
             }
 
             $view->with('ministrygroups',ministrygroup::select('id','ministry_group_name')->get());

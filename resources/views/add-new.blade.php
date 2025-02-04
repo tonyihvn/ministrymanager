@@ -40,7 +40,7 @@
 
                                             <div class="form-group">
                                                 <label for="date_recieved" class="control-label sr-only">Date Received</label>
-                                                    <input id="date_recieved" name="date_recieved" type="text" class="form-control datepicker" placeholder="Date Received">
+                                                <input id="date_recieved" name="date_recieved" type="text" class="form-control datepicker" placeholder="Date Received">
                                             </div>
 
                                             <div class="form-group">

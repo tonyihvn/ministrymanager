@@ -96,7 +96,7 @@ class HomeController extends Controller
     public function members()
 
     {
-      $members = User::all()->where('settings_id',Auth::user()->settings_id);
+      $members = User::all()->where('settings_id',Auth::user()->settings_id)->orderBy('id','desc');
       return view('members', compact('members'));
     }
 

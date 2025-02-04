@@ -17,6 +17,7 @@
                                 <th width="20" class="visible-md visible-lg">#</th>
                                 <th>Full Name</th>
                                 <th>Status</th>
+                                <th>WelcomeOn</th>
                                 <th class="visible-md visible-lg">Ministry</th>
                                 <th class="visible-md visible-lg">Phone Number</th>
                                 <th class="visible-md visible-lg">Assigned To</th>
@@ -35,6 +36,7 @@
                                     <td class="visible-md visible-lg">{{$member->id}}</td>
                                     <td>{{$member->name}}</td>
                                     <td>{{$member->status}}</td>
+                                    <td>{{$member->about}}</td>
                                     <td class="visible-md visible-lg">
                                         @if(!empty($member->ministries))
                                             @foreach ($member->ministries as $min)
